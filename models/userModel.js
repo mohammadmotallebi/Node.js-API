@@ -1,14 +1,12 @@
-const pool = require('../dbConfig');
+const mongoose = require('../dbConfig');
 
-class UserModel {
-    getAllUsers(callback) {
-        pool.query('SELECT * FROM users', (error, results) => {
-            if (error) {
-                return callback(error);
-            }
-            return callback(null, results);
-        });
-    }
-}
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String,
+    role: String
+});
 
-module.exports = new UserModel();
+const UserModel = mongoose.model('User', userSchema);
+
+module.exports = UserModel;

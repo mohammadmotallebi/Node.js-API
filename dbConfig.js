@@ -1,10 +1,9 @@
-const mysql = require('mysql2');
+const mongoose = require('mongoose');
 
-const pool = mysql.createPool({
-   host: 'localhost',
-   user: 'root',
-    password: '57041362',
-    database: 'express_fastjoo',
-});
+main().catch(err => console.log(err));
 
-module.exports = pool;
+async function main() {
+    await mongoose.connect('mongodb://127.0.0.1:27017/express_fastjoo');
+}
+
+module.exports = mongoose;
