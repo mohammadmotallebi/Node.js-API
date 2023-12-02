@@ -34,7 +34,7 @@ class AuthController {
                 httpOnly: true,
                 secure: true,
             });
-            res.status(200).json({ token: token });
+            res.status(200).json({ logged_in: true });
         } catch (error) {
             res.status(500).json({ error: error });
         }
