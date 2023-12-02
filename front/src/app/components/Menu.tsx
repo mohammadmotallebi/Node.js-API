@@ -36,6 +36,7 @@ import {useDispatch} from "react-redux";
 import {AppDispatch} from "@redux/store";
 import {useLazyLogoutQuery} from "@services/api";
 import {useRouter} from "next/navigation";
+import Profile from "@components/Profile";
 
 const drawerWidth = 240;
 
@@ -116,6 +117,7 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
         React.useState<null | HTMLElement>(null);
     const dispatch = useDispatch<AppDispatch>()
     const router = useRouter()
+    const [profileModalOpen, setProfileModalOpen] = React.useState(false);
 
     const [logout, {isSuccess, isError}] = useLazyLogoutQuery()
 
@@ -128,6 +130,12 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
+    };
+
+    const handleViewProfile = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+        setProfileModalOpen(true)
     };
 
     const handleMenuClose = () => {
@@ -169,8 +177,7 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleViewProfile}>Profile</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
 
 
@@ -337,6 +344,7 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
             </Box>
             {renderMobileMenu}
             {renderMenu}
+            <Profile open={profileModalOpen} onClose={() => setProfileModalOpen(false)}/>
         </Box>
     );
 }

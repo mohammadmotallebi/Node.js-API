@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {useRouter} from 'next/navigation';
 import type {RootState} from "@redux/store";
 import {setToken, setUser, setIsLoggedIn, setIsLoading, setError} from "@redux/slices/authSlice";
-
+import config from "@config";
 
 
 export const logout = () => {
@@ -15,7 +15,7 @@ export const redirect = (path: string) => {
     router.push(path)
 }
 
-const getCookieValue = (name) => (
+const getCookieValue = (name: string) => (
     document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
 )
 
@@ -32,7 +32,7 @@ export const api = createApi({
                 headers.set('Authorization', `Bearer ${token}`)
             }
             headers.set('Accept', 'application/json')
-            headers.set('X-API-KEY', 'x4CsiyWKKNSl1P3FS2vWPwiGhwTLdqUCVynogB3rEvFtRJLTs8aEBZywfAAL')
+            headers.set('X-API-KEY', config.X_API_KEY)
             return headers
         }
     }),
@@ -82,8 +82,8 @@ export const api = createApi({
             onQueryStarted(arg, {queryFulfilled, dispatch}): Promise<void> | void {
                 queryFulfilled?.then((data: any) => {
                     console.log('Auth====>onQueryStarted', data)
-                    dispatch(setUser(data.user))
-                    dispatch(setIsLoggedIn(true))
+                    setUser(data.user)
+                    setIsLoggedIn(true)
                 })
 
             },
