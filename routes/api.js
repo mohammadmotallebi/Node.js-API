@@ -11,8 +11,10 @@ guestRouter.post('/register', authController.register);
 guestRouter.post('/login', authController.login);
 
 userRouter.use(apiKeyMiddleware).use(authMiddleware);
-
 userRouter.get('/users', userController.getAllUsers);
+userRouter.get('/users/:id', userController.getUserById);
+userRouter.get('/me', userController.currentUser);
+userRouter.post('/logout', authController.logout);
 
 module.exports = {
     guest: guestRouter,
