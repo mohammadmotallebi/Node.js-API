@@ -12,10 +12,16 @@ guestRouter.post('/register', authController.register);
 guestRouter.post('/login', authController.login);
 
 userRouter.use(apiKeyMiddleware).use(authMiddleware);
-userRouter.get('/users', roleMiddleware(['*']), userController.getAllUsers)
-userRouter.get('/users/:id', roleMiddleware(['*']), userController.getUserById);
-userRouter.get('/me', userController.currentUser);
-userRouter.post('/logout', authController.logout);
+userRouter.post('/users', roleMiddleware(['*']), userController.getAllUsers)
+userRouter.get('/user/:id', roleMiddleware(['*']), userController.getUserById);
+userRouter.get('/me',roleMiddleware(['*']), userController.currentUser);
+userRouter.post('/logout',roleMiddleware(['*']), authController.logout);
+userRouter.put('/update-me', roleMiddleware(['*']), userController.updateUser);
+userRouter.put('/update-my-password', roleMiddleware(['*']), userController.updatePassword);
+userRouter.put('/user/:id/role-update', roleMiddleware(['*']), userController.updateRole);
+userRouter.delete('/user/:id/delete', roleMiddleware(['*']), userController.deleteUser);
+userRouter.put('/user/:id/update', roleMiddleware(['admin']), userController.updateAllUserInformation);
+
 
 module.exports = {
     guest: guestRouter,
