@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const UserModel = require('../models/userModel');
 const config = require('../config');
-const {compare} = require("bcrypt");
 
 class AuthController {
 
@@ -22,9 +21,15 @@ class AuthController {
     async login(req, res) {
         try {
             const {email, password} = req.body;
-            const user = await UserModel.findOne({email: email});
+            console.log(email)
+            console.log(password)
+            const user = await UserModel.findOne({email: email, deleted: false});
+            console.log(user)
+            if (!user) {
+                return res.status(401).json({error: 'Incorrect Credentials!'});
+            }
             const isPasswordCorrect = await bcrypt.compare(password, user.password);
-            if (!user || !user.deleted || !isPasswordCorrect) {
+            if (!isPasswordCorrect) {
                 return res.status(401).json({error: 'Incorrect Credentials!'});
             }
             const token = jwt.sign({id: user._id}, config.SECRET_KEY, {algorithm: 'HS256', expiresIn: '1h'});
@@ -36,6 +41,29 @@ class AuthController {
                 secure: true,
             });
             res.status(200).json({logged_in: true});
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({error: error});
+        }
+    }
+
+    async checkAuth(req, res) {
+        try {
+            const token = req.cookies.token;
+            if (token) {
+                jwt.verify(token, config.SECRET_KEY, (err, decoded) => {
+                    if (err) {
+                        return res.status(401).json({ error: err });
+                    }
+                    req.decoded = decoded;
+                    res.status(200).json({
+                        logged_in: true,
+                        user: decoded.id
+                    });
+                });
+            } else {
+                res.status(401).json({ error: 'Unauthorized. Token not found.' });
+            }
         } catch (error) {
             res.status(500).json({error: error});
         }

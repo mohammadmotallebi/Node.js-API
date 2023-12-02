@@ -7,11 +7,13 @@ const apiKeyMiddleware = require('../middlewares/apiKeyMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 
+
 guestRouter.use(apiKeyMiddleware);
 guestRouter.post('/register', authController.register);
 guestRouter.post('/login', authController.login);
 
 userRouter.use(apiKeyMiddleware).use(authMiddleware);
+userRouter.post('/auth', authController.checkAuth);
 userRouter.post('/users', roleMiddleware(['*']), userController.getAllUsers)
 userRouter.get('/user/:id', roleMiddleware(['*']), userController.getUserById);
 userRouter.get('/me',roleMiddleware(['*']), userController.currentUser);
