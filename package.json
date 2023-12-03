@@ -16,6 +16,12 @@
     "test": "jest --verbose"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/exo-2": "^5.0.15",
+    "@fontsource/rajdhani": "^5.0.8",
+    "@mui/material": "^5.14.19",
+    "@mui/x-data-grid": "^6.18.2",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cookie-parser": "~1.4.4",

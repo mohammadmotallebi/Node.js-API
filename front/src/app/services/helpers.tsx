@@ -22,3 +22,7 @@ export function isErrorWithMessage(
         typeof (error as any).message === 'string'
     )
 }
+
+export const getCookieValue = (name: string) => (
+    document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+)

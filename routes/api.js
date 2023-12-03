@@ -6,6 +6,7 @@ const authController = require('../controllers/authController');
 const apiKeyMiddleware = require('../middlewares/apiKeyMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
+const postController = require('../controllers/postController');
 
 
 guestRouter.use(apiKeyMiddleware);
@@ -23,6 +24,15 @@ userRouter.put('/update-my-password', roleMiddleware(['*']), userController.upda
 userRouter.put('/user/:id/role-update', roleMiddleware(['*']), userController.updateRole);
 userRouter.delete('/user/:id/delete', roleMiddleware(['*']), userController.deleteUser);
 userRouter.put('/user/:id/update', roleMiddleware(['admin']), userController.updateAllUserInformation);
+userRouter.put('/user/:id/restore', roleMiddleware(['admin']), userController.restoreUser);
+// Post routes
+userRouter.post('/posts', roleMiddleware(['*']), postController.getAllPosts);
+userRouter.get('/post/:id', roleMiddleware(['*']), postController.getPostById);
+userRouter.post('/post/create', roleMiddleware(['admin','author','super-admin']), postController.createPost);
+userRouter.put('/post/:id/update', roleMiddleware(['admin','author','super-admin']), postController.updatePost);
+userRouter.delete('/post/:id/delete', roleMiddleware(['admin','super-admin']), postController.deletePost);
+userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), postController.restorePost);
+
 
 
 module.exports = {

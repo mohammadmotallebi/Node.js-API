@@ -37,7 +37,7 @@ import {AppDispatch} from "@redux/store";
 import {useLazyLogoutQuery} from "@services/api";
 import {useRouter} from "next/navigation";
 import Profile from "@components/Profile";
-
+import { usePathname } from 'next/navigation'
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -60,6 +60,11 @@ const closedMixin = (theme: Theme): CSSObject => ({
         width: `calc(${theme.spacing(8)} + 1px)`,
     },
 });
+
+const Span = styled('span')(({ theme }) => ({
+    color: theme.palette.success.main,
+    }));
+
 
 // @ts-ignore
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -109,7 +114,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function MiniDrawer({ children }: { children: React.ReactNode}) {
+export default function MyMenu({ children }: { children: React.ReactNode}) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -123,7 +128,7 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+    const pathname = usePathname()
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -142,6 +147,14 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
         setAnchorEl(null);
         handleMobileMenuClose();
     };
+
+    const handleClick = () => {
+        console.log(pathname)
+    };
+
+    React.useEffect(() => {
+        handleClick()
+    }, [])
 
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -256,9 +269,9 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        sx={{ display: { xs: 'none', sm: 'block' }, fontFamily:'Lobster', fontSize: 34 }}
                     >
-                        MUI
+                        Fast<Span>Joo</Span>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -310,13 +323,14 @@ export default function MiniDrawer({ children }: { children: React.ReactNode}) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {[{"name":"Dashboard", "icon": <HouseTwoToneIcon />, "link": "/"},
-                        {"name":"Cards", "icon": <DashboardTwoTone />, "link": "/pages/cards"},
-                        {"name":"Table", "icon": <TableChartTwoTone />, "link": "/pages/table"},
+                    {[{"name":"Dashboard", "icon": <HouseTwoToneIcon />, "link": "/pages/dashboard"},
+                        {"name":"Posts", "icon": <DashboardTwoTone />, "link": "/pages/posts"},
+                        {"name":"Shop", "icon": <TableChartTwoTone />, "link": "/pages/shop"},
                         {"name":"Forms", "icon": <DnsTwoTone />, "link": "/pages/forms"},
                         {"name":"List", "icon": <ListTwoTone />, "link": "/pages/list"}].map((text, index) => (
                         <ListItem key={index} disablePadding sx={{ display: 'block' }} component="a" href={text.link}>
                             <ListItemButton
+                                selected={pathname === text.link}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',

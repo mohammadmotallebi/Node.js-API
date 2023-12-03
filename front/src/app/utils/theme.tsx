@@ -1,6 +1,18 @@
 'use client';
 import {createTheme} from "@mui/material/styles";
+import '@fontsource/rajdhani/300.css';
+import '@fontsource/rajdhani/400.css';
+import '@fontsource/rajdhani/500.css';
+import '@fontsource/rajdhani/600.css';
+import '@fontsource/rajdhani/700.css';
+import '@fontsource/exo-2/300.css';
+import '@fontsource/exo-2/400.css';
+import '@fontsource/exo-2/500.css';
+import '@fontsource/exo-2/600.css';
+import '@fontsource/exo-2/700.css';
+import '@fontsource/lobster';
 
+// @ts-ignore
 const theme = createTheme({
     palette: {
         mode: 'dark',
@@ -8,20 +20,34 @@ const theme = createTheme({
             main: '#ffffff',
         },
         secondary: {
-            main: '#dc004e',
+            main: '#c8c8c8',
+        },
+        info: {
+            main: '#4765fa',
+        },
+        success: {
+            main: '#4caf50',
+            'contrastText': '#fff'
+        },
+        warning: {
+            main: '#ff9800',
+        },
+        error: {
+            main: '#f44336',
         },
         background: {
-            default: '#121212',
+            default: '#2c2c2c',
         },
         text: {
-            primary: '#fff',
-            secondary: '#fff',
+            primary: '#dadada',
+            secondary: '#ffffff',
         }
     },
     typography: {
         fontFamily: [
-            'Roboto',
-            'sans-serif',
+            "'Exo 2'",
+            "'Rajdhani'",
+            "'Lobster'",
         ].join(','),
         fontSize: 14,
         fontWeightLight: 300,
@@ -41,9 +67,9 @@ const theme = createTheme({
                     boxShadow: 'none',
                     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
                     zIndex: 1201,
-                },
-},
-            },
+                }
+            }
+        },
         MuiDrawer: {
             styleOverrides: {
                 paper: {
@@ -56,16 +82,22 @@ const theme = createTheme({
 
             },
         },
-
         MuiListItem: {
             styleOverrides: {
                 root: {
                     color: '#fff',
+                    '& .MuiListItemButton-root.Mui-selected': {
+                        backgroundColor: '#2c2c2c',
+                    },
 
                 },
             },
-        }
-
+        },
+        MuiButtonBase: {
+            defaultProps: {
+                disableRipple: true,
+            },
+        },
     }
 })
 

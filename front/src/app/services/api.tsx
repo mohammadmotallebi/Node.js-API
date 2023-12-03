@@ -3,6 +3,7 @@ import {useRouter} from 'next/navigation';
 import type {RootState} from "@redux/store";
 import {setToken, setUser, setIsLoggedIn, setIsLoading, setError} from "@redux/slices/authSlice";
 import config from "@config";
+import {getCookieValue} from "@services/helpers";
 
 
 export const logout = () => {
@@ -15,9 +16,7 @@ export const redirect = (path: string) => {
     router.push(path)
 }
 
-const getCookieValue = (name: string) => (
-    document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-)
+
 
 // @ts-ignore
 export const api = createApi({

@@ -87,6 +87,15 @@ class UserController {
             res.status(500).json({error: error});
         }
     }
+
+    async restoreUser(req, res) {
+        try {
+            await UserModel.findByIdAndUpdate(req.params.id, {deleted: false});
+            res.status(200).json({message: 'User restored successfully!'});
+        } catch (error) {
+            res.status(500).json({error: error});
+        }
+    }
 }
 
 module.exports = new UserController();

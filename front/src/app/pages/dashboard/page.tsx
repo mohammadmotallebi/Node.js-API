@@ -1,6 +1,6 @@
 'use client'
 import Dashboard from "@components/Dashboard";
-import Menu from "@components/Menu";
+import MyMenu from "@components/Menu";
 import Loading from "@components/Loading";
 import React from "react";
 import store from '@redux/store'
@@ -30,7 +30,7 @@ export default function async () {
     return (
         <div className="flex">
             <Loading open={!isLoggedIn}/>
-            <Menu children={<Dashboard/>}/>
+            <MyMenu children={<Dashboard/>}/>
         </div>
     )
 }
