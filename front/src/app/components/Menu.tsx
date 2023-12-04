@@ -25,6 +25,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {
     CardGiftcardTwoTone,
     DashboardCustomizeTwoTone,
@@ -38,6 +39,7 @@ import {useLazyLogoutQuery} from "@services/api";
 import {useRouter} from "next/navigation";
 import Profile from "@components/Profile";
 import { usePathname } from 'next/navigation'
+import {Breadcrumbs, Chip, emphasize} from "@mui/material";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -114,6 +116,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
+
 export default function MyMenu({ children }: { children: React.ReactNode}) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
@@ -153,6 +156,7 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
     };
 
     React.useEffect(() => {
+        console.log(pathname.split('/'))
         handleClick()
     }, [])
 
@@ -173,6 +177,26 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const StyledBreadcrumb = styled(Chip)(({ theme }) => {
+        const backgroundColor =
+            theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[800];
+        return {
+            backgroundColor,
+            height: theme.spacing(3),
+            color: theme.palette.text.primary,
+            cursor: 'pointer',
+            fontWeight: theme.typography.fontWeightRegular,
+            '&:hover, &:focus': {
+                backgroundColor: emphasize(backgroundColor, 0.06),
+            },
+            '&:active': {
+                boxShadow: theme.shadows[1],
+                backgroundColor: emphasize(backgroundColor, 0.12),
+            },
+        };
+    }) as typeof Chip;
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
@@ -323,14 +347,14 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {[{"name":"Dashboard", "icon": <HouseTwoToneIcon />, "link": "/pages/dashboard"},
-                        {"name":"Posts", "icon": <DashboardTwoTone />, "link": "/pages/posts"},
-                        {"name":"Shop", "icon": <TableChartTwoTone />, "link": "/pages/shop"},
-                        {"name":"Forms", "icon": <DnsTwoTone />, "link": "/pages/forms"},
-                        {"name":"List", "icon": <ListTwoTone />, "link": "/pages/list"}].map((text, index) => (
+                    {[{"name":"Dashboard", "icon": <HouseTwoToneIcon />, "link": "/dashboard"},
+                        {"name":"Posts", "icon": <DashboardTwoTone />, "link": "/posts"},
+                        {"name":"Shop", "icon": <TableChartTwoTone />, "link": "/shop"},
+                        {"name":"Forms", "icon": <DnsTwoTone />, "link": "/forms"},
+                        {"name":"List", "icon": <ListTwoTone />, "link": "/list"}].map((text, index) => (
                         <ListItem key={index} disablePadding sx={{ display: 'block' }} component="a" href={text.link}>
                             <ListItemButton
-                                selected={pathname === text.link}
+                                selected={pathname.includes(text.link) && text.link !== '/'}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
@@ -346,7 +370,10 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                                 >
                                     {text.icon}
                                 </ListItemIcon>
-                                <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText
+                                    primary={text.name}
+                                    sx={{ opacity: open ? 1 : 0 }}
+                                />
                             </ListItemButton>
                         </ListItem>
                     ))}
@@ -354,6 +381,23 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
+                <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />} sx={{mb:3}}>
+                    {
+                        pathname.split('/').length > 2 &&
+                        pathname.split('/').map((item, index) => {
+                            if (index !== 0) {
+                                return (
+                                    <StyledBreadcrumb
+                                        key={index}
+                                        component="a"
+                                        href={(pathname !== pathname.split(item)[0] + item) ? pathname.split(item)[0] + item : '#'}
+                                        label={item}
+                                    />
+                                )
+                            }
+                        })
+                    }
+                </Breadcrumbs>
                 {children}
             </Box>
             {renderMobileMenu}
