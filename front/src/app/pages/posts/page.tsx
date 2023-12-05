@@ -108,7 +108,7 @@ export default function async() {
                         <IconButton aria-label="edit" color="info"
                             onClick={() => {
                                 setRowID(params.row._id)
-                                router.push(`/posts/edit/${params.row._id}`)
+                                router.push(`/posts/${params.row._id}/edit`)
                             }}
                         >
                             <EditIcon />
@@ -116,7 +116,7 @@ export default function async() {
                         <IconButton aria-label="delete" color={"error"}
                             onClick={() => {
                                 setRowID(params.row._id)
-                                router.push(`/posts/delete/${params.row._id}`)
+                                router.push(`/posts/${params.row._id}/delete`)
                             }}
                         >
                             <DeleteIcon />
