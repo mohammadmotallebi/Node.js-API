@@ -1,22 +1,8 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {useRouter} from 'next/navigation';
-import type {RootState} from "@redux/store";
-import {setToken, setUser, setIsLoggedIn, setIsLoading, setError} from "@redux/slices/authSlice";
-import config from "@config";
-import {getCookieValue} from "@services/helpers";
-
-
-export const logout = () => {
-    const router = useRouter()
-    router.push('/auth/login')
-}
-
-export const redirect = (path: string) => {
-    const router = useRouter()
-    router.push(path)
-}
-
-
+import type {RootState} from "../redux/store";
+import {setToken, setUser, setIsLoggedIn, setIsLoading, setError} from "../redux/slices/authSlice";
+import config from "../../../config.json";
+import {getCookieValue} from "./helpers";
 
 // @ts-ignore
 export const api = createApi({

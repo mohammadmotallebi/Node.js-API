@@ -16,16 +16,11 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
-export default function async () {
-
+export default function async (props: any) {
     return (
         <div className="flex">
             <Modal
-                keepMounted
-                open
-                aria-labelledby="keep-mounted-modal-title"
-                aria-describedby="keep-mounted-modal-description"
+                {...props}
             >
                 <Box sx={style}>
                     <Typography id="keep-mounted-modal-title" variant="h6" component="h2">

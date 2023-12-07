@@ -32,6 +32,8 @@ userRouter.post('/post/create', roleMiddleware(['admin','author','super-admin'])
 userRouter.put('/post/:id/update', roleMiddleware(['admin','author','super-admin']), postController.updatePost);
 userRouter.delete('/post/:id/delete', roleMiddleware(['admin','super-admin']), postController.deletePost);
 userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), postController.restorePost);
+// Tag routes
+userRouter.post('/tags', roleMiddleware(['*']), postController.getAllTags);
 
 
 

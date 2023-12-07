@@ -55,6 +55,16 @@ class PostController {
             res.status(500).json({ error: error });
         }
     }
+
+    // get all Tags
+    async getAllTags(req, res) {
+        try {
+            const tags = await PostModel.find().distinct('tags');
+            res.status(200).json(tags);
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
 }
 
 module.exports = new PostController();

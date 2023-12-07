@@ -65,20 +65,17 @@ const [open, setOpen] = React.useState(false);
             email: email.current?.value as string,
             password: password.current?.value as string
         }
-        const result = await login(user)
-        if (result.error) {
-            setMessage(result.error.message)
-            setOpen(true)
-        } else {
-            setIsLoggedIn(true)
-        }
+        const result = await login(user).then(data => {
+            console.log('Data =>',data)
+        })
 
         console.log('result', store.getState().auth)
     }
 
     useEffect(() => {
-        console.log('isSuccess', isLoggedIn)
-        if (isLoggedIn) {
+        console.log('User Logged In ====>', store.getState().auth.isLoggedIn)
+        if (store.getState().auth.isLoggedIn) {
+            setIsLoggedIn(true)
             router.push('/pages/dashboard')
         }
     }, [isLoggedIn])

@@ -6,6 +6,7 @@ import '@/app/globals.css'
 import theme from "@utils/theme";
 import {ThemeProvider} from "@mui/material";
 
+
 const roboto = Roboto({weight:'400',style:"normal", subsets: ['latin-ext'] })
 
 export const metadata: Metadata = {
@@ -15,7 +16,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}:{children: React.ReactNode}) {
   return (
-
       <ThemeProvider theme={theme}>
         <html lang="en">
 
