@@ -7,7 +7,7 @@ _Technologies_:
 * Material-UI
 * Redux-Toolkit
 * React Router 6
-* MangoDB
+* MongoDB
 * RTK Query
 
 
