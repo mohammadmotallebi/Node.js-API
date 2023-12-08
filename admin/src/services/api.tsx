@@ -1,7 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import type {RootState} from "../redux/store";
-import {setToken, setUser, setIsLoggedIn, setIsLoading, setError} from "../redux/slices/authSlice";
-import config from "../../../config.json";
+import {setUser, setIsLoggedIn} from "../redux/slices/authSlice";
+import config from "../config.json";
 import {getCookieValue} from "./helpers";
 
 // @ts-ignore
@@ -10,7 +9,7 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3000/api/',
         credentials: 'include',
-        prepareHeaders: (headers, {getState}) => {
+        prepareHeaders: (headers, {}) => {
             const token = getCookieValue('token')
             console.log('token', token)
             if (token) {

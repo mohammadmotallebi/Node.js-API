@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import MyMenu from "../../components/Menu";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { PostAdd } from '@mui/icons-material';
-import {useLazyTagsQuery} from "../../../services/api";
+import {useLazyTagsQuery} from "../../services/api";
 import {Autocomplete} from "@mui/material";
 //
 // const bull = (
@@ -20,7 +20,7 @@ import {Autocomplete} from "@mui/material";
 //     </Box>
 // );
 
-export default function () {
+const CreatePost = () => {
     const [value, setValue] = React.useState('');
     const [tagsArray, setTagsArray] = React.useState([]);
     const [tags, {data, isLoading, isError, isSuccess, status}] = useLazyTagsQuery()
@@ -72,7 +72,7 @@ export default function () {
                             height: '300px',
                             marginBottom: '40px'
 
-                    }}
+                        }}
                     />
                 </div>
                 <div>
@@ -106,3 +106,10 @@ export default function () {
         </Card>
     );
 }
+export default () => {
+    return (
+        <div>
+            <MyMenu children={<CreatePost />}/>
+        </div>
+    );
+};

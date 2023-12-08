@@ -1,4 +1,3 @@
-'use client'
 import React, {useEffect, useRef} from 'react';
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
@@ -8,18 +7,15 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import styled from '@emotion/styled'
-import {useLazyLoginQuery, useLazyAuthQuery} from "@services/api";
-import store from '@redux/store'
+import {useLazyLoginQuery} from "../../services/api";
 import LoadingButton from '@mui/lab/LoadingButton';
 import LoginIcon from '@mui/icons-material/Login';
 import Snackbar from '@mui/material/Snackbar';
-import {Alert} from '@mui/material';
+import Alert from '@mui/material/Alert';
 import Slide, {SlideProps} from '@mui/material/Slide';
-import { useRouter } from "next/navigation";
-
+import {useNavigation} from "react-router-dom";
 
 const Img = styled.img`
   margin: auto;
@@ -35,12 +31,12 @@ const Item = styled(Grid)`
 `
 
 
-export default function Page() {
+export default function Login() {
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+    const history = useNavigation()
     // declare ref for email & password string type in TypeScript
     const email = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null)
-    const router = useRouter()
     interface User {
         email: string,
         password: string
@@ -65,21 +61,15 @@ const [open, setOpen] = React.useState(false);
             email: email.current?.value as string,
             password: password.current?.value as string
         }
-        const result = await login(user).then(data => {
-            console.log('Data =>',data)
+       await login(user).then(data => {
+           console.log('data', data.data.logged_in)
+            if (data.data.logged_in) {
+                setIsLoggedIn(true)
+                console.log('data', data)
+                window.location.href = '/'
+            }
         })
-
-        console.log('result', store.getState().auth)
     }
-
-    useEffect(() => {
-        console.log('User Logged In ====>', store.getState().auth.isLoggedIn)
-        if (store.getState().auth.isLoggedIn) {
-            setIsLoggedIn(true)
-            router.push('/pages/dashboard')
-        }
-    }, [isLoggedIn])
-
 
         // check auth
 

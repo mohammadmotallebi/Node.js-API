@@ -36,7 +36,7 @@ app.use(clientErrorHandler)
 app.use(errorHandler)
 
 app.use(cors({
-    origin: 'http://localhost:4000',
+    origin: 'http://localhost:5173',
     credentials: true
 }));
 app.use('/api', routes.guest);

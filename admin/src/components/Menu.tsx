@@ -16,7 +16,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import HouseTwoToneIcon from '@mui/icons-material/HouseTwoTone';
 import Badge from "@mui/material/Badge";
@@ -26,11 +25,9 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { matchRoutes, useLocation } from "react-router-dom"
 import {
-    CardGiftcardTwoTone,
-    DashboardCustomizeTwoTone,
-    DashboardTwoTone, DnsTwoTone, InputTwoTone, ListTwoTone,
-    TableBarTwoTone,
+    DashboardTwoTone, DnsTwoTone, ListTwoTone,
     TableChartTwoTone
 } from "@mui/icons-material";
 import {useDispatch} from "react-redux";
@@ -121,10 +118,18 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const dispatch = useDispatch<AppDispatch>()
+    useDispatch<AppDispatch>();
     const [profileModalOpen, setProfileModalOpen] = React.useState(false);
 
-    const [logout, {isSuccess, isError}] = useLazyLogoutQuery()
+    const [logout] = useLazyLogoutQuery()
+
+    const location = useLocation()
+
+    const { pathname } = location
+
+    React.useEffect(() => {
+        console.log('pathname', pathname)
+    }, [pathname])
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -338,14 +343,14 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {[{"name":"Dashboard", "icon": <HouseTwoToneIcon />, "link": "/dashboard"},
+                    {[{"name":"Dashboard", "icon": <HouseTwoToneIcon />, "link": "/"},
                         {"name":"Posts", "icon": <DashboardTwoTone />, "link": "/posts"},
                         {"name":"Shop", "icon": <TableChartTwoTone />, "link": "/shop"},
                         {"name":"Forms", "icon": <DnsTwoTone />, "link": "/forms"},
                         {"name":"List", "icon": <ListTwoTone />, "link": "/list"}].map((text, index) => (
                         <ListItem key={index} disablePadding sx={{ display: 'block' }} component="a" href={text.link}>
                             <ListItemButton
-                                // selected={pathname.includes(text.link) && text.link !== '/'}
+                                selected={pathname.includes(text.link) && text.link !== '/'}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',

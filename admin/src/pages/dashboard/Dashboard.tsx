@@ -4,11 +4,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-import * as React from "react";
 import Chart from "react-apexcharts";
 import Box from "@mui/material/Box";
+import MyMenu from "../../components/Menu";
 
-export default function () {
+ function Dashboard () {
     return (
         <Box>
             <Grid container spacing={4}>
@@ -229,5 +229,11 @@ export default function () {
                 </Grid>
             </Grid>
         </Box>
+    )
+}
+
+export default function () {
+    return (
+        <MyMenu children={<Dashboard/>} />
     )
 }
