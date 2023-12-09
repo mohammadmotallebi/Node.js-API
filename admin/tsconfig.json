@@ -20,7 +20,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
   },
   "paths": {
     "@/*": ["./src/*"],
@@ -39,5 +39,5 @@
     "@emotion/react",
     "@mui/material/Tooltip", "@emotion/styled", "@mui/material/Unstable_Grid2","@mui/x-data-grid"
   ],
-    "exclude": ["node_modules", "build", "dist", "public"]
+    "exclude": ["node_modules", "build", "dist", "public"],
 }

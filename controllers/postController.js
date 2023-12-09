@@ -4,7 +4,7 @@ class PostController {
     async getAllPosts(req, res) {
         const filter = req.body;
         try {
-            const posts = await PostModel.find(filter);
+            const posts = await PostModel.find(filter).and([{deleted: false}])
             res.status(200).json(posts);
         } catch (error) {
             res.status(500).json({ error: error });
@@ -40,8 +40,9 @@ class PostController {
 
     async deletePost(req, res) {
         try {
-            const post = await PostModel.findByIdAndDelete(req.params.id);
-            res.status(200).json(post);
+           const post = await PostModel.findByIdAndUpdate(req.params.id, {deleted: true})
+           const deletedPost = await PostModel.findById(post._id);
+              res.status(200).json(deletedPost);
         } catch (error) {
             res.status(500).json({ error: error });
         }
@@ -49,8 +50,11 @@ class PostController {
 
     async restorePost(req, res) {
         try {
-            const post = await PostModel.findByIdAndUpdate(req.params.id, {deleted: false});
-            res.status(200).json(post);
+            await PostModel.findByIdAndUpdate(req.params.id, {deleted: false})
+                .then(post => {
+                    res.status(200).json(post);
+                })
+
         } catch (error) {
             res.status(500).json({ error: error });
         }

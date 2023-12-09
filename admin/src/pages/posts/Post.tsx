@@ -19,15 +19,17 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import configs from "../../config.json"
+import ConfirmDialog from "../../components/ConfirmDialog";
 
 export default function async() {
     const [postData, setPostData] = React.useState([])
-    const [rowID, setRowID] = React.useState(null)
+    const [rowID, setRowID] = React.useState('')
     // const router = useRouter()
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
     const [posts, {data: postsData, isLoading: postsIsLoading, isError: postsIsError, isSuccess: postsIsSuccess, status: postsStatus}] = useLazyPostsQuery()
     const navigate = useNavigate();
-
+    const [open , setOpen] = React.useState(false)
     const [contextMenu, setContextMenu] = React.useState<{
         mouseX: number;
         mouseY: number;
@@ -41,10 +43,25 @@ export default function async() {
         });
     };
 
+    const handleDelete = async (id: string) => {
+        console.log('id', id)
 
-    const handleClose = () => {
-        setContextMenu(null);
-    };
+        const deletePost = await fetch(`http://localhost:3000/api/post/${id}/delete`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'X-API-KEY': configs.X_API_KEY
+            }
+        })
+        const deletePostData = await deletePost.json()
+        console.log('deletePostData', deletePostData)
+        if (deletePostData.deleted) {
+            const newPostData = postData.filter((item: any) => item._id !== id)
+            setPostData(newPostData)
+            setOpen(false)
+        }
+    }
 
 
     const columns: GridColDef[] = [
@@ -96,10 +113,11 @@ export default function async() {
                             <EditIcon />
                         </IconButton>
                         <IconButton aria-label="delete" color={"error"}
-                                    onClick={() => {
+                                    onClick={() =>
+                                    {
                                         setRowID(params.row._id)
-                                        // router.push(`/posts/${params.row._id}/delete`)
-                                    }}
+                                        setOpen(true)
+                                       }}
                         >
                             <DeleteIcon />
                         </IconButton>
@@ -121,6 +139,13 @@ export default function async() {
     // @ts-ignore
     return (
         <MyMenu>
+            <ConfirmDialog open={open} text={"Are you sure you want to delete this post?"} title={"Delete Post"} actionText={"Delete"}
+                           setOpen={() => {
+                                 setOpen(false)
+                           }}
+                           action={() => {
+                handleDelete(rowID)
+            }} />
             <div style={{height: 400, width: '100%', cursor: 'context-menu' }}>
                 {/*Add New Post*/}
                 <Stack direction="row" spacing={1} sx={{ mb: 1 }}>

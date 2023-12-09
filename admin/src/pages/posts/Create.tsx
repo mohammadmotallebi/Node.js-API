@@ -5,11 +5,16 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import { Editor } from '@tinymce/tinymce-react';
 import { PostAdd } from '@mui/icons-material';
 import {useLazyTagsQuery} from "../../services/api";
 import {Autocomplete} from "@mui/material";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import config from "../../config.json";
+import {ReactComponentElement} from "react";
 //
 // const bull = (
 //     <Box
@@ -24,6 +29,14 @@ const CreatePost = () => {
     const [value, setValue] = React.useState('');
     const [tagsArray, setTagsArray] = React.useState([]);
     const [tags, {data, isLoading, isError, isSuccess, status}] = useLazyTagsQuery()
+    const [open, setOpen] = React.useState(false);
+    const [newTag, setNewTag] = React.useState('');
+    const [post, setPost] = React.useState({
+        title: '',
+        content: '',
+        tags: []
+    })
+
 
     React.useEffect(() => {
 
@@ -42,40 +55,78 @@ const CreatePost = () => {
         })
     }, [isSuccess])
 
+    const handleAddTag = () => {
+        setTagsArray([...tagsArray, newTag])
+        setOpen(false)
+    };
+    const handleAddPost = async () => {
+        await fetch('http://localhost:3000/api/post/create', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-API-KEY': config.X_API_KEY
+            },
+            body: JSON.stringify({...post})
+        }).then((data) => {
+            console.log('data', data)
+        })
+    }
+
+
+
 
     return (
         <Card sx={{
             minWidth: 275,
             '& .MuiTextField-root': { m: 1, width: '50ch' },
         }}>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+                <DialogTitle>Add a new TAG</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="tag"
+                        label="TAG"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => setNewTag(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button color="error" onClick={() => setOpen(false)}>Cancel</Button>
+                    <Button color="success" onClick={handleAddTag}>Add</Button>
+                </DialogActions>
+            </Dialog>
             <CardContent>
                 <div>
-                    <TextField label="Title" color="secondary"  focused />
+                    <TextField label="Title" color="secondary"  focused  onChange={(e) => setPost({...post, title: e.target.value})}/>
                 </div>
                 <div>
-
-                    <ReactQuill
-
-                        theme="snow"
-                        value={value}
-                        onChange={setValue}
-                        modules={{
-                            toolbar: [
-                                [{ 'header': [1, 2, false] }],
-                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                                [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-                                ['link', 'image'],
-                                ['clean']
+                    <Editor
+                        apiKey='0ri8a6vo0tw281pra7ytwnojxxg9mw4lhdei2bzagatdh0tx'
+                        onEditorChange={(content, editor) => {
+                            console.log('Content was updated:', content);
+                            setPost({...post, content: content})
+                        }}
+                        init={{
+                            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                            tinycomments_mode: 'embedded',
+                            tinycomments_author: 'Author name',
+                            mergetags_list: [
+                                { value: 'First.Name', title: 'First Name' },
+                                { value: 'Email', title: 'Email' },
                             ],
+                            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                         }}
-                        style={{
-                            height: '300px',
-                            marginBottom: '40px'
-
-                        }}
+                        initialValue="Welcome to TinyMCE!"
                     />
                 </div>
-                <div>
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                     <Autocomplete
                         multiple
                         id="tags-outlined"
@@ -86,19 +137,28 @@ const CreatePost = () => {
                         filterSelectedOptions
                         clearOnBlur
                         itemScope
+                        onChange={(event, newValue) => {
+                            setPost({...post, tags: newValue})
+                            console.log('newValue', newValue)
+                        }}
                         renderInput={(params) => (
                             <TextField
                                 {...params}
-                                label="filterSelectedOptions"
-                                placeholder="Favorites"
+                                label="TAGS"
+                                placeholder="TAGS"
                             />
                         )}
                     />
+                    <Button variant="contained" color="success"
+                    onClick={() => setOpen(true)}
+                    >
+                        Add Tag
+                    </Button>
                 </div>
 
             </CardContent>
             <CardActions>
-                <Button size="small"  color={'success'} variant="contained">
+                <Button size="small"  color={'success'} variant="contained" onClick={handleAddPost}>
                     <PostAdd/>
                     Add Post
                 </Button>

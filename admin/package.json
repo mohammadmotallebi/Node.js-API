@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^40.1.0",
-    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@emotion/primitives": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -27,9 +25,10 @@
     "@testing-library/jest-dom": "6.1.5",
     "@testing-library/react": "14.1.2",
     "@testing-library/user-event": "14.5.1",
+    "@tinymce/tinymce-react": "^4.3.2",
     "apexcharts": "3.44.2",
+    "draft-js": "^0.11.7",
     "js-cookie": "^3.0.5",
-    "quill": "^1.3.7",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.2.0",
@@ -44,8 +43,9 @@
   "devDependencies": {
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.4",
-    "@types/react": "^18.2.37",
+    "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
+    "@types/react-draft-wysiwyg": "^1.13.7",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.2.0",
@@ -54,5 +54,9 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
+  },
+  "resolutions": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.17"
   }
 }
