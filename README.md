@@ -1,3 +1,15 @@
-# Node.js API Service
-** MongoDB **
+**Node.JS | Express API**
+
+_Technologies_:
+* Node.JS (Express)
+* React.JS
+* TypeScript
+* Material-UI
+* Redux-Toolkit
+* React Router 6
+* MongoDB
+* RTK Query
+
+
+
 
