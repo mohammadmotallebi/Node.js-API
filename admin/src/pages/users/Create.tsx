@@ -9,10 +9,7 @@ import {PostAdd} from '@mui/icons-material';
 import {useLazyRolesQuery, useLazyCreateUserQuery} from "../../services/api";
 import {CardHeader, FormHelperText, InputLabel} from '@mui/material';
 import {Autocomplete} from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import {useNavigate} from "react-router-dom";
 
 const CreateUser = () => {
     const [rolesArray, setRolesArray] = React.useState([]);
@@ -21,6 +18,7 @@ const CreateUser = () => {
     const [open, setOpen] = React.useState(false);
     const [newRole, setNewRole] = React.useState('');
     const [error, setError] = React.useState(false);
+    const navigate = useNavigate();
     const [user, setUser] = React.useState({
         name: '',
         email: '',
@@ -58,7 +56,7 @@ const CreateUser = () => {
         }
         await createUser(user).then((data: any) => {
             console.log('data', data)
-            window.location.href = '/users'
+            navigate('/users')
         })
     }
 

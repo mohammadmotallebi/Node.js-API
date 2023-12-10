@@ -45,6 +45,17 @@ class UserController {
         }
     }
 
+    async userCreate(req, res) {
+        try {
+            const {name, email, password, role} = req.body;
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const user = await UserModel.create({name: name, email: email, password: hashedPassword, role: role});
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(500).json({error: error});
+        }
+    }
+
     // Update user's role
     async updateRole(req, res) {
         try {

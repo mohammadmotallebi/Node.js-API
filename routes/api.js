@@ -17,6 +17,7 @@ userRouter.use(apiKeyMiddleware).use(authMiddleware);
 userRouter.post('/auth', authController.checkAuth);
 userRouter.post('/users', roleMiddleware(['*']), userController.getAllUsers)
 userRouter.get('/user/:id', roleMiddleware(['*']), userController.getUserById);
+userRouter.post('/user/create', roleMiddleware(['admin']), userController.userCreate);
 userRouter.get('/me',roleMiddleware(['*']), userController.currentUser);
 userRouter.post('/logout',roleMiddleware(['*']), authController.logout);
 userRouter.put('/update-me', roleMiddleware(['*']), userController.updateUser);

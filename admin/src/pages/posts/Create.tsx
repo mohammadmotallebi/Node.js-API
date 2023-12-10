@@ -13,6 +13,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import {useNavigate} from "react-router-dom";
 
 const CreatePost = () => {
     const [tagsArray, setTagsArray] = React.useState([]);
@@ -20,6 +21,7 @@ const CreatePost = () => {
     const [createPost] = useLazyCreatePostQuery()
     const [open, setOpen] = React.useState(false);
     const [newTag, setNewTag] = React.useState('');
+    const navigate = useNavigate();
     const [post, setPost] = React.useState({
         title: '',
         content: '',
@@ -53,7 +55,7 @@ const CreatePost = () => {
         console.log('post', post)
         await createPost(post).then((data: any) => {
             console.log('data', data)
-            window.location.href = '/posts'
+            navigate('/posts')
         })
     }
 
