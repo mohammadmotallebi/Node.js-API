@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import {styled, useTheme, Theme, CSSObject} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiAppBar, {AppBarProps as MuiAppBarProps} from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,16 +25,16 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { matchRoutes, useLocation } from "react-router-dom"
+import {useLocation} from "react-router-dom"
 import {
-    DashboardTwoTone, DnsTwoTone, ListTwoTone,
-    TableChartTwoTone
+    DashboardTwoTone, People
 } from "@mui/icons-material";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../redux/store";
 import {useLazyLogoutQuery} from "../services/api";
 import Profile from "../components/Profile";
 import {Breadcrumbs, Chip, emphasize} from "@mui/material";
+
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -58,13 +58,13 @@ const closedMixin = (theme: Theme): CSSObject => ({
     },
 });
 
-const Span = styled('span')(({ theme }) => ({
+const Span = styled('span')(({theme}) => ({
     color: theme.palette.success.main,
-    }));
+}));
 
 
 // @ts-ignore
-const DrawerHeader = styled('div')(({ theme }) => ({
+const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -78,7 +78,7 @@ interface AppBarProps extends MuiAppBarProps {
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+})<AppBarProps>(({theme, open}) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -94,8 +94,8 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
+const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
+    ({theme, open}) => ({
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
@@ -112,7 +112,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 
-export default function MyMenu({ children }: { children: React.ReactNode}) {
+export default function MyMenu({children}: { children: React.ReactNode }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -125,7 +125,7 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
 
     const location = useLocation()
 
-    const { pathname } = location
+    const {pathname} = location
 
     React.useEffect(() => {
         console.log('pathname', pathname)
@@ -173,7 +173,7 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const StyledBreadcrumb = styled(Chip)(({ theme }) => {
+    const StyledBreadcrumb = styled(Chip)(({theme}) => {
         const backgroundColor =
             theme.palette.mode === 'light'
                 ? theme.palette.grey[100]
@@ -237,7 +237,7 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
             <MenuItem>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="error">
-                        <MailIcon />
+                        <MailIcon/>
                     </Badge>
                 </IconButton>
                 <p>Messages</p>
@@ -249,7 +249,7 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                     color="inherit"
                 >
                     <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
+                        <NotificationsIcon/>
                     </Badge>
                 </IconButton>
                 <p>Notifications</p>
@@ -262,15 +262,15 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                     aria-haspopup="true"
                     color="inherit"
                 >
-                    <AccountCircle />
+                    <AccountCircle/>
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
         </Menu>
     );
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
             <AppBar position="fixed" open={open}>
                 <Toolbar>
                     <IconButton
@@ -280,24 +280,24 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                         edge="start"
                         sx={{
                             marginRight: 5,
-                            ...(open && { display: 'none' }),
+                            ...(open && {display: 'none'}),
                         }}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' }, fontFamily:'Lobster', fontSize: 34 }}
+                        sx={{display: {xs: 'none', sm: 'block'}, fontFamily: 'Lobster', fontSize: 34}}
                     >
                         Fast<Span>Joo</Span>
                     </Typography>
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{flexGrow: 1}}/>
+                    <Box sx={{display: {xs: 'none', md: 'flex'}}}>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">
-                                <MailIcon />
+                                <MailIcon/>
                             </Badge>
                         </IconButton>
                         <IconButton
@@ -306,7 +306,7 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                             color="inherit"
                         >
                             <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
+                                <NotificationsIcon/>
                             </Badge>
                         </IconButton>
                         <IconButton
@@ -318,10 +318,10 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                            <AccountCircle />
+                            <AccountCircle/>
                         </IconButton>
                     </Box>
-                    <Box sx={{ display: { xl: 'flex', md: 'none' } }}>
+                    <Box sx={{display: {xl: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="show more"
@@ -330,7 +330,7 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                             onClick={handleMobileMenuOpen}
                             color="inherit"
                         >
-                            <MoreIcon />
+                            <MoreIcon/>
                         </IconButton>
                     </Box>
                 </Toolbar>
@@ -338,17 +338,17 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
+                <Divider/>
                 <List>
-                    {[{"name":"Dashboard", "icon": <HouseTwoToneIcon />, "link": "/"},
-                        {"name":"Posts", "icon": <DashboardTwoTone />, "link": "/posts"},
-                        {"name":"Shop", "icon": <TableChartTwoTone />, "link": "/shop"},
-                        {"name":"Forms", "icon": <DnsTwoTone />, "link": "/forms"},
-                        {"name":"List", "icon": <ListTwoTone />, "link": "/list"}].map((text, index) => (
-                        <ListItem key={index} disablePadding sx={{ display: 'block' }} component="a" href={text.link}>
+                    {[
+                        {"name": "Dashboard", "icon": <HouseTwoToneIcon/>, "link": "/"},
+                        {"name": "Posts", "icon": <DashboardTwoTone/>, "link": "/posts"},
+                        {"name": "Users", "icon": <People/>, "link": "/users"},
+                    ].map((text, index) => (
+                        <ListItem key={index} disablePadding sx={{display: 'block'}} component="a" href={text.link}>
                             <ListItemButton
                                 selected={pathname.includes(text.link) && text.link !== '/'}
                                 sx={{
@@ -368,31 +368,31 @@ export default function MyMenu({ children }: { children: React.ReactNode}) {
                                 </ListItemIcon>
                                 <ListItemText
                                     primary={text.name}
-                                    sx={{ opacity: open ? 1 : 0 }}
+                                    sx={{opacity: open ? 1 : 0}}
                                 />
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <DrawerHeader />
-                <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />} sx={{mb:3}}>
-                    {/*{*/}
-                    {/*    pathname.split('/').length > 2 &&*/}
-                    {/*    pathname.split('/').map((item, index) => {*/}
-                    {/*        if (index !== 0) {*/}
-                    {/*            return (*/}
-                    {/*                <StyledBreadcrumb*/}
-                    {/*                    key={index}*/}
-                    {/*                    component="a"*/}
-                    {/*                    href={(pathname !== pathname.split(item)[0] + item) ? pathname.split(item)[0] + item : '#'}*/}
-                    {/*                    label={item}*/}
-                    {/*                />*/}
-                    {/*            )*/}
-                    {/*        }*/}
-                    {/*    })*/}
-                    {/*}*/}
+            <Box component="main" sx={{flexGrow: 1, p: 3, height: '100vh', overflow: 'auto'}}>
+                <DrawerHeader/>
+                <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small"/>} sx={{mb: 3}}>
+                    {
+                        pathname.split('/').length > 2 &&
+                        pathname.split('/').map((item, index) => {
+                            if (index !== 0) {
+                                return (
+                                    <StyledBreadcrumb
+                                        key={index}
+                                        component="a"
+                                        href={(pathname !== pathname.split(item)[0] + item) ? pathname.split(item)[0] + item : '#'}
+                                        label={item}
+                                    />
+                                )
+                            }
+                        })
+                    }
                 </Breadcrumbs>
                 {children}
             </Box>

@@ -7,19 +7,22 @@ import Providers from "./redux/provider";
 import './globals.css'
 import theme from "./utils/theme";
 import {ThemeProvider} from "@mui/material";
-import {createBrowserRouter,redirect, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Post from "./pages/posts/Post";
-import Create from "./pages/posts/Create";
+import CreatePost from "./pages/posts/Create";
+import EditPost from "./pages/posts/Edit";
 import config from "../../config.json";
+import NotFound from "./pages/errors/NotFound";
+
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
 
 const authenticate = async () => {
-    const auth = await fetch('http://localhost:3000/api/auth',{
+    const auth = await fetch('http://localhost:3000/api/auth', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -40,27 +43,32 @@ const authenticate = async () => {
 
 const router = createBrowserRouter([
     {
-        path:"/login",
-        element: <Login />
+        path: "/login",
+        element: <Login/>
     },
     {
         path: "/",
-        element: <Dashboard />,
-        loader: async ({params}) => {
-            console.log('params', params)
-            await authenticate()
-            return null
-        }
+        element: <Dashboard/>,
+        loader: authenticate
     },
     {
         path: "/posts",
-        element: <Post />,
+        element: <Post/>,
         loader: authenticate
     },
     {
         path: "/posts/create",
-        element: <Create/>,
+        element: <CreatePost/>,
         loader: authenticate
+    },
+    {
+        path: "/posts/edit",
+        element: <EditPost/>,
+        loader: authenticate
+    },
+    {
+        path: "*",
+        element: <NotFound />
     }
 ]);
 
@@ -68,8 +76,8 @@ root.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
             <Providers>
-                <RouterProvider router={router} />
-                <App />
+                <RouterProvider router={router}/>
+                <App/>
             </Providers>
         </ThemeProvider>
     </React.StrictMode>

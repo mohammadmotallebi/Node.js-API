@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -15,31 +15,35 @@ import LoginIcon from '@mui/icons-material/Login';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Slide, {SlideProps} from '@mui/material/Slide';
-import {useNavigation} from "react-router-dom";
+import IMAGES from "../../components/Images.tsx";
+// import LoginImage from '/assets/Project_158-03.jpg'
 
 const Img = styled.img`
-  margin: auto;
-  display: block;
-  max-width: 100%;
-  height: 100%;
-  object-fit: cover;
+    margin: auto;
+    display: block;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
 `
 const Item = styled(Grid)`
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 `
 
 
 export default function Login() {
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-    const history = useNavigation()
+    const [_isLoggedIn, setIsLoggedIn] = React.useState(false)
+
     // declare ref for email & password string type in TypeScript
     const email = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null)
+    const remember = useRef<HTMLInputElement>(null)
+
     interface User {
         email: string,
-        password: string
+        password: string,
+        remember?: boolean
     }
 
 
@@ -52,26 +56,36 @@ export default function Login() {
     */
     // @ts-ignore
     const [login, {data, isLoading, isError, isSuccess, status,}] = useLazyLoginQuery()
-const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState('');
 
 
     const handleLogin = async () => {
         const user: User = {
             email: email.current?.value as string,
-            password: password.current?.value as string
+            password: password.current?.value as string,
+            remember: remember.current?.checked as boolean
         }
-       await login(user).then(data => {
-           console.log('data', data.data.logged_in)
-            if (data.data.logged_in) {
+        await login(user).then(data => {
+            console.log('data', data.data?.logged_in)
+            if (data.data?.logged_in) {
                 setIsLoggedIn(true)
                 console.log('data', data)
                 window.location.href = '/'
+            } else {
+                // @ts-ignore
+                setMessage(data.error?.data.error)
+                setOpen(true)
             }
+        }).catch(error => {
+            console.log('error', error)
+            setMessage(error.message)
+            setOpen(true)
+
         })
     }
 
-        // check auth
+    // check auth
 
     return (
         <div className="flex">
@@ -118,6 +132,7 @@ const [open, setOpen] = React.useState(false);
                                 <FormControlLabel
                                     control={<Checkbox value="remember" color="primary"/>}
                                     label="Remember me"
+                                    inputRef={remember}
                                 />
                                 <LoadingButton
                                     type="button"
@@ -151,7 +166,7 @@ const [open, setOpen] = React.useState(false);
                 </Grid>
                 {/*Grid Image in left-side*/}
                 <Grid container sm={8} order={{xs: 2, sm: 1}}>
-                    <Img src="/dist/images/Project_158-03.jpg" alt="random" loading='lazy'/>
+                    <Img src={IMAGES.login} alt="random"/>
                 </Grid>
             </Grid>
         </div>

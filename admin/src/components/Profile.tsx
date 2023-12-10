@@ -16,7 +16,7 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-export default function async (props: any) {
+export default function async(props: any) {
     return (
         <div className="flex">
             <Modal
@@ -26,7 +26,7 @@ export default function async (props: any) {
                     <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
                         Text in a modal
                     </Typography>
-                    <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
+                    <Typography id="keep-mounted-modal-description" sx={{mt: 2}}>
                         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
                     </Typography>
                 </Box>

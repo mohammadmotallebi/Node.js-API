@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { api } from '../../services/api';
+import {createSlice} from '@reduxjs/toolkit';
+import {api} from '../../services/api';
 
 /*
 {
@@ -107,6 +107,6 @@ const authSlice = createSlice({
     }
 })
 
-export const {setToken, setUser, setIsLoggedIn, setIsLoading, setError } = authSlice.actions
+export const {setToken, setUser, setIsLoggedIn, setIsLoading, setError} = authSlice.actions
 
 export default authSlice.reducer

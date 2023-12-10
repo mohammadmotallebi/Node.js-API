@@ -8,7 +8,7 @@ import Chart from "react-apexcharts";
 import Box from "@mui/material/Box";
 import MyMenu from "../../components/Menu";
 
- function Dashboard () {
+function Dashboard() {
     return (
         <Box>
             <Grid container spacing={4}>
@@ -109,7 +109,10 @@ import MyMenu from "../../components/Menu";
             <Grid container spacing={4}>
                 <Grid md>
                     <Chart type='line'
-                           series={[{name: 'Mohammad', data: [5, 6, 4, 9, 3, 5, 7, 9, 2, 1, 8, 7, 9, 3, 5, 4, 8, 3, 1, 9, 6, 3, 5, 7, 4]}]}
+                           series={[{
+                               name: 'Mohammad',
+                               data: [5, 6, 4, 9, 3, 5, 7, 9, 2, 1, 8, 7, 9, 3, 5, 4, 8, 3, 1, 9, 6, 3, 5, 7, 4]
+                           }]}
                            options={{
                                chart: {
                                    height: 350,
@@ -234,6 +237,6 @@ import MyMenu from "../../components/Menu";
 
 export default function () {
     return (
-        <MyMenu children={<Dashboard/>} />
+        <MyMenu children={<Dashboard/>}/>
     )
 }

@@ -20,7 +20,7 @@ class AuthController {
     // Login user
     async login(req, res) {
         try {
-            const {email, password} = req.body;
+            const {email, password, remember} = req.body;
             console.log(email)
             console.log(password)
             const user = await UserModel.findOne({email: email, deleted: false});
@@ -32,7 +32,7 @@ class AuthController {
             if (!isPasswordCorrect) {
                 return res.status(401).json({error: 'Incorrect Credentials!'});
             }
-            const token = jwt.sign({id: user._id}, config.SECRET_KEY, {algorithm: 'HS256', expiresIn: '1h'});
+            const token = jwt.sign({id: user._id}, config.SECRET_KEY, {algorithm: 'HS256', expiresIn: remember ? '60d' : '7d'});
             res.cookie('token', token, {
                 httpOnly: true
             });

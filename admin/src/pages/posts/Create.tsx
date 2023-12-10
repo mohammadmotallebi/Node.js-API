@@ -5,30 +5,19 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
-import { Editor } from '@tinymce/tinymce-react';
-import { PostAdd } from '@mui/icons-material';
-import {useLazyTagsQuery} from "../../services/api";
+import {Editor} from '@tinymce/tinymce-react';
+import {PostAdd} from '@mui/icons-material';
+import {useLazyTagsQuery, useLazyCreatePostQuery} from "../../services/api";
 import {Autocomplete} from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import config from "../../config.json";
-import {ReactComponentElement} from "react";
-//
-// const bull = (
-//     <Box
-//         component="span"
-//         sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-//     >
-//         •
-//     </Box>
-// );
 
 const CreatePost = () => {
-    const [value, setValue] = React.useState('');
     const [tagsArray, setTagsArray] = React.useState([]);
-    const [tags, {data, isLoading, isError, isSuccess, status}] = useLazyTagsQuery()
+    const [tags, {isSuccess}] = useLazyTagsQuery()
+    const [createPost] = useLazyCreatePostQuery()
     const [open, setOpen] = React.useState(false);
     const [newTag, setNewTag] = React.useState('');
     const [post, setPost] = React.useState({
@@ -56,31 +45,23 @@ const CreatePost = () => {
     }, [isSuccess])
 
     const handleAddTag = () => {
+        // @ts-ignore
         setTagsArray([...tagsArray, newTag])
         setOpen(false)
     };
     const handleAddPost = async () => {
-        await fetch('http://localhost:3000/api/post/create', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-API-KEY': config.X_API_KEY
-            },
-            body: JSON.stringify({...post})
-        }).then((data) => {
+        console.log('post', post)
+        await createPost(post).then((data: any) => {
             console.log('data', data)
+            window.location.href = '/posts'
         })
     }
-
-
 
 
     return (
         <Card sx={{
             minWidth: 275,
-            '& .MuiTextField-root': { m: 1, width: '50ch' },
+            '& .MuiTextField-root': {m: 1, width: '50ch'},
         }}>
             <Dialog open={open} onClose={() => setOpen(false)}>
                 <DialogTitle>Add a new TAG</DialogTitle>
@@ -103,12 +84,13 @@ const CreatePost = () => {
             </Dialog>
             <CardContent>
                 <div>
-                    <TextField label="Title" color="secondary"  focused  onChange={(e) => setPost({...post, title: e.target.value})}/>
+                    <TextField label="Title" color="secondary" focused
+                               onChange={(e) => setPost({...post, title: e.target.value})}/>
                 </div>
                 <div>
                     <Editor
                         apiKey='0ri8a6vo0tw281pra7ytwnojxxg9mw4lhdei2bzagatdh0tx'
-                        onEditorChange={(content, editor) => {
+                        onEditorChange={(content) => {
                             console.log('Content was updated:', content);
                             setPost({...post, content: content})
                         }}
@@ -118,10 +100,12 @@ const CreatePost = () => {
                             tinycomments_mode: 'embedded',
                             tinycomments_author: 'Author name',
                             mergetags_list: [
-                                { value: 'First.Name', title: 'First Name' },
-                                { value: 'Email', title: 'Email' },
+                                {value: 'First.Name', title: 'First Name'},
+                                {value: 'Email', title: 'Email'},
                             ],
-                            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                            ai_request: (_request: any, respondWith: {
+                                string: (arg0: () => Promise<never>) => any;
+                            }) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                         }}
                         initialValue="Welcome to TinyMCE!"
                     />
@@ -137,7 +121,7 @@ const CreatePost = () => {
                         filterSelectedOptions
                         clearOnBlur
                         itemScope
-                        onChange={(event, newValue) => {
+                        onChange={(_event, newValue) => {
                             setPost({...post, tags: newValue})
                             console.log('newValue', newValue)
                         }}
@@ -150,7 +134,7 @@ const CreatePost = () => {
                         )}
                     />
                     <Button variant="contained" color="success"
-                    onClick={() => setOpen(true)}
+                            onClick={() => setOpen(true)}
                     >
                         Add Tag
                     </Button>
@@ -158,7 +142,7 @@ const CreatePost = () => {
 
             </CardContent>
             <CardActions>
-                <Button size="small"  color={'success'} variant="contained" onClick={handleAddPost}>
+                <Button size="small" color={'success'} variant="contained" onClick={handleAddPost}>
                     <PostAdd/>
                     Add Post
                 </Button>
@@ -169,7 +153,7 @@ const CreatePost = () => {
 export default () => {
     return (
         <div>
-            <MyMenu children={<CreatePost />}/>
+            <MyMenu children={<CreatePost/>}/>
         </div>
     );
 };

@@ -1,9 +1,9 @@
 import MyMenu from "../../components/Menu";
 import Loading from "../../components/Loading";
 import React from "react";
-import {useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 // import store from 'redux/store'
-import {useLazyAuthQuery, useLazyPostsQuery} from "../../services/api";
+import {useLazyPostsQuery, useLazyDeletePostQuery} from "../../services/api";
 // import {setUser} from "redux/slices/authSlice";
 import {DataGrid} from '@mui/x-data-grid/DataGrid';
 import {
@@ -19,48 +19,30 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import configs from "../../config.json"
+import CircularProgress from '@mui/material/CircularProgress';
 import ConfirmDialog from "../../components/ConfirmDialog";
 
 export default function async() {
     const [postData, setPostData] = React.useState([])
     const [rowID, setRowID] = React.useState('')
     // const router = useRouter()
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-    const [posts, {data: postsData, isLoading: postsIsLoading, isError: postsIsError, isSuccess: postsIsSuccess, status: postsStatus}] = useLazyPostsQuery()
+    const [posts, {isLoading: postsIsLoading}] = useLazyPostsQuery()
+    const [deletePost, {isLoading: deletePostIsLoading}] = useLazyDeletePostQuery()
     const navigate = useNavigate();
-    const [open , setOpen] = React.useState(false)
-    const [contextMenu, setContextMenu] = React.useState<{
-        mouseX: number;
-        mouseY: number;
-    } | null>(null);
+    const [open, setOpen] = React.useState(false)
 
-    const handleContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        setContextMenu({
-            mouseX: event.clientX - 2,
-            mouseY: event.clientY - 4,
-        });
-    };
 
     const handleDelete = async (id: string) => {
         console.log('id', id)
 
-        const deletePost = await fetch(`http://localhost:3000/api/post/${id}/delete`, {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'X-API-KEY': configs.X_API_KEY
+        await deletePost(id).then((data: any) => {
+            console.log('data', data)
+            if (data.data.deleted) {
+                const newPostData = postData.filter((item: any) => item._id !== id)
+                setPostData(newPostData)
+                setOpen(false)
             }
         })
-        const deletePostData = await deletePost.json()
-        console.log('deletePostData', deletePostData)
-        if (deletePostData.deleted) {
-            const newPostData = postData.filter((item: any) => item._id !== id)
-            setPostData(newPostData)
-            setOpen(false)
-        }
     }
 
 
@@ -107,20 +89,21 @@ export default function async() {
                         <IconButton aria-label="edit" color="info"
                                     onClick={() => {
                                         setRowID(params.row._id)
-                                        // router.push(`/posts/${params.row._id}/edit`)
+                                        navigate(`edit`,{ state: { id: params.row._id } })
                                     }}
                         >
-                            <EditIcon />
+                            <EditIcon/>
                         </IconButton>
+                        { deletePostIsLoading ? <CircularProgress size={12} /> :
                         <IconButton aria-label="delete" color={"error"}
-                                    onClick={() =>
-                                    {
+                                    onClick={() => {
                                         setRowID(params.row._id)
                                         setOpen(true)
-                                       }}
+                                    }}
                         >
-                            <DeleteIcon />
+                            <DeleteIcon/>
                         </IconButton>
+                        }
                     </ButtonGroup>
                 );
             }
@@ -139,18 +122,19 @@ export default function async() {
     // @ts-ignore
     return (
         <MyMenu>
-            <ConfirmDialog open={open} text={"Are you sure you want to delete this post?"} title={"Delete Post"} actionText={"Delete"}
+            <ConfirmDialog open={open} text={"Are you sure you want to delete this post?"} title={"Delete Post"}
+                           actionText={"Delete"}
                            setOpen={() => {
-                                 setOpen(false)
+                               setOpen(false)
                            }}
                            action={() => {
-                handleDelete(rowID)
-            }} />
-            <div style={{height: 400, width: '100%', cursor: 'context-menu' }}>
+                               handleDelete(rowID)
+                           }}/>
+            <div style={{height: 400, width: '100%', cursor: 'context-menu'}}>
                 {/*Add New Post*/}
-                <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
+                <Stack direction="row" spacing={1} sx={{mb: 1}}>
                     <Button size="small" variant="contained" onClick={handleCreate} color={"success"}>
-                        <GridAddIcon sx={{ mr: 1 }} />
+                        <GridAddIcon sx={{mr: 1}}/>
                         Add New Post
                     </Button>
                 </Stack>
@@ -163,7 +147,7 @@ export default function async() {
                         },
                     }}
                     loading={postsIsLoading}
-                    pageSizeOptions={[5,10,20,50,100]}
+                    pageSizeOptions={[5, 10, 20, 50, 100]}
                     disableColumnFilter
                     disableColumnSelector
                     disableDensitySelector

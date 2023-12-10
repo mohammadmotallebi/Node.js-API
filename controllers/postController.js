@@ -31,7 +31,7 @@ class PostController {
 
     async updatePost(req, res) {
         try {
-            const post = await PostModel.findByIdAndUpdate(req.params.id, req.body);
+            const post = await PostModel.findByIdAndUpdate(req.body._id, req.body);
             res.status(200).json(post);
         } catch (error) {
             res.status(500).json({ error: error });

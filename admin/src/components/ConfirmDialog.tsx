@@ -7,31 +7,31 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function AlertDialog(
-    {text, title, action, actionText, open=false, setOpen}
-        : {text: string, title: string, action: any, actionText: string, open: boolean, setOpen: any}
+    {text, title, action, actionText, open = false, setOpen}
+        : { text: string, title: string, action: any, actionText: string, open: boolean, setOpen: any }
 ) {
 
     return (
-            <Dialog
-                open={open}
-                onClose={setOpen}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {title}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        {text}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={setOpen} >Cancel</Button>
-                    <Button onClick={action} autoFocus>
-                        {actionText}
-                    </Button>
-                </DialogActions>
-            </Dialog>
+        <Dialog
+            open={open}
+            onClose={setOpen}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">
+                {title}
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    {text}
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={setOpen}>Cancel</Button>
+                <Button onClick={action} autoFocus>
+                    {actionText}
+                </Button>
+            </DialogActions>
+        </Dialog>
     );
 }

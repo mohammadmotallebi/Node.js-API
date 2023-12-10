@@ -29,7 +29,7 @@ userRouter.put('/user/:id/restore', roleMiddleware(['admin']), userController.re
 userRouter.post('/posts', roleMiddleware(['*']), postController.getAllPosts);
 userRouter.get('/post/:id', roleMiddleware(['*']), postController.getPostById);
 userRouter.post('/post/create', roleMiddleware(['admin','author','super-admin']), postController.createPost);
-userRouter.put('/post/:id/update', roleMiddleware(['admin','author','super-admin']), postController.updatePost);
+userRouter.put('/post/update', roleMiddleware(['admin','author','super-admin']), postController.updatePost);
 userRouter.delete('/post/:id/delete', roleMiddleware(['admin','super-admin']), postController.deletePost);
 userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), postController.restorePost);
 // Tag routes

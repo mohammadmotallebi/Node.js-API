@@ -54,8 +54,8 @@ export const api = createApi({
             // logout and redirect to login page
             // @ts-ignore
             onQueryStarted(arg: QueryArg, api: MutationLifecycleApi<QueryArg, BaseQuery, ResultType, ReducerPath>): Promise<void> | void {
-                    api.dispatch(setUser({}))
-                    api.dispatch(setIsLoggedIn(false))
+                api.dispatch(setUser({}))
+                api.dispatch(setIsLoggedIn(false))
             }
         }),
         auth: build.query({
@@ -86,6 +86,32 @@ export const api = createApi({
                 method: 'POST',
             }),
         }),
+        createPost: build.query({
+            query: (body) => ({
+                url: 'post/create',
+                method: 'POST',
+                body
+            }),
+        }),
+        postById: build.query({
+            query: (id) => ({
+                url: `post/${id}`,
+                method: 'GET',
+            }),
+        }),
+        updatePost: build.query({
+            query: (body) => ({
+                url: `post/update`,
+                method: 'PUT',
+                body
+            }),
+        }),
+        deletePost: build.query({
+            query: (id) => ({
+                url: `post/${id}/delete`,
+                method: 'DELETE',
+            }),
+        }),
     })
 });
 
@@ -96,5 +122,9 @@ export const {
     useLazyLogoutQuery,
     useLazyPostsQuery,
     useLazyTagsQuery,
+    useLazyCreatePostQuery,
+    useLazyPostByIdQuery,
+    useLazyUpdatePostQuery,
+    useLazyDeletePostQuery
 } = api;
 export const {reducer, middleware} = api;
