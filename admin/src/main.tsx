@@ -13,6 +13,9 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Post from "./pages/posts/Post";
 import CreatePost from "./pages/posts/Create";
 import EditPost from "./pages/posts/Edit";
+import Users from "./pages/users/Users";
+import CreateUser from "./pages/users/Create";
+import EditUser from "./pages/users/Edit";
 import config from "../../config.json";
 import NotFound from "./pages/errors/NotFound";
 
@@ -64,6 +67,21 @@ const router = createBrowserRouter([
     {
         path: "/posts/edit",
         element: <EditPost/>,
+        loader: authenticate
+    },
+    {
+        path: "/users",
+        element: <Users/>,
+        loader: authenticate
+    },
+    {
+        path: "/users/create",
+        element: <CreateUser/>,
+        loader: authenticate
+    },
+    {
+        path: "/users/edit",
+        element: <EditUser/>,
         loader: authenticate
     },
     {

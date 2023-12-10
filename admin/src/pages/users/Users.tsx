@@ -2,7 +2,7 @@ import MyMenu from "../../components/Menu";
 import Loading from "../../components/Loading";
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import {useLazyPostsQuery, useLazyDeletePostQuery} from "../../services/api";
+import {useLazyUsersQuery, useLazyDeleteUserQuery} from "../../services/api";
 import {DataGrid} from '@mui/x-data-grid/DataGrid';
 import {
     GridToolbar,
@@ -19,11 +19,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ConfirmDialog from "../../components/ConfirmDialog";
 
 export default function async() {
-    const [postData, setPostData] = React.useState([])
+    const [userData, setUserData] = React.useState([])
     const [rowID, setRowID] = React.useState('')
     // const router = useRouter()
-    const [posts, {isLoading: postsIsLoading}] = useLazyPostsQuery()
-    const [deletePost, {isLoading: deletePostIsLoading}] = useLazyDeletePostQuery()
+    const [users, {isLoading: usersIsLoading}] = useLazyUsersQuery()
+    const [deleteUser, {isLoading: deleteUserIsLoading}] = useLazyDeleteUserQuery()
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false)
 
@@ -31,11 +31,11 @@ export default function async() {
     const handleDelete = async (id: string) => {
         console.log('id', id)
 
-        await deletePost(id).then((data: any) => {
+        await deleteUser(id).then((data: any) => {
             console.log('data', data)
             if (data.data.deleted) {
-                const newPostData = postData.filter((item: any) => item._id !== id)
-                setPostData(newPostData)
+                const newUserData = userData.filter((item: any) => item._id !== id)
+                setUserData(newUserData)
                 setOpen(false)
             }
         })
@@ -52,72 +52,73 @@ export default function async() {
             minWidth: 200
         },
         {
-            field: "title",
-            headerName: "Title",
+            field: "name",
+            headerName: "Name",
             sortable: true,
             filterable: true,
             minWidth: 300
         },
         {
-            field: "tags",
-            headerName: "Tags",
-            sortable: false,
+            field: "email",
+            headerName: "Email",
+            sortable: true,
             filterable: true,
-            flex: 0.4,
-            minWidth: 200
+            minWidth: 300
         },
-        // Edit Button & Delete Button
         {
-            field: "actions",
-            headerName: "Actions",
-            sortable: false,
-            filterable: false,
-            flex: 0.4,
-            minWidth: 200,
-            renderCell: (params) => {
-                return (
-                    <ButtonGroup
-                        disableElevation
-                        variant="contained"
-                        aria-label="Disabled elevation buttons"
-                    >
-                        <IconButton aria-label="edit" color="info"
-                                    onClick={() => {
-                                        setRowID(params.row._id)
-                                        navigate(`edit`,{ state: { id: params.row._id } })
-                                    }}
-                        >
-                            <EditIcon/>
-                        </IconButton>
-                        { deletePostIsLoading ? <CircularProgress size={12} /> :
-                        <IconButton aria-label="delete" color={"error"}
-                                    onClick={() => {
-                                        setRowID(params.row._id)
-                                        setOpen(true)
-                                    }}
-                        >
-                            <DeleteIcon/>
-                        </IconButton>
-                        }
-                    </ButtonGroup>
-                );
-            }
+            field: "role",
+            headerName: "Role",
+            sortable: true,
+            filterable: true,
+            minWidth: 300
+        },
+        {
+            field: "action",
+            headerName: "Action",
+            sortable: true,
+            filterable: true,
+            minWidth: 300,
+            renderCell: (params: any) => (
+                <ButtonGroup
+                    disableElevation
+                    variant="contained"
+                    aria-label="Disabled elevation buttons"
+                >
+                    <IconButton aria-label="edit" color="info" onClick={() => {
+                        navigate('/users/edit', {state: {id: params.row._id}})
+                    }}>
+                        <EditIcon/>
+                    </IconButton>
+                    { deleteUserIsLoading ? <CircularProgress size={12} /> :
+                    <IconButton aria-label="delete" color={"error"} onClick={() => {
+                        setOpen(true)
+                        setRowID(params.row._id)
+                    }}>
+                        <DeleteIcon/>
+                    </IconButton>
+                    }
+                </ButtonGroup>
+            )
         },
     ];
-    const handleCreate = async () => {
-        return navigate('create')
+
+    const handleCreate = () => {
+        navigate('/users/create')
     }
+
+
 
     React.useEffect(() => {
         // @ts-ignore
-        const p = posts().then((data) => {
-            setPostData(data.data)
+        users().then((data: any) => {
+            console.log('data', data)
+            setUserData(data.data)
         })
     }, [])
-    // @ts-ignore
+
     return (
         <MyMenu>
-            <ConfirmDialog open={open} text={"Are you sure you want to delete this post?"} title={"Delete Post"}
+            <ConfirmDialog open={open} text={"Are you sure you want to delete this user?"} title={"Delete User"}
                            actionText={"Delete"}
                            setOpen={() => {
                                setOpen(false)
@@ -130,7 +131,7 @@ export default function async() {
                 <Stack direction="row" spacing={1} sx={{mb: 1}}>
                     <Button size="small" variant="contained" onClick={handleCreate} color={"success"}>
                         <GridAddIcon sx={{mr: 1}}/>
-                        Add New Post
+                        Add New User
                     </Button>
                 </Stack>
                 <DataGrid
@@ -141,18 +142,18 @@ export default function async() {
                             },
                         },
                     }}
-                    loading={postsIsLoading}
+                    loading={usersIsLoading}
                     pageSizeOptions={[5, 10, 20, 50, 100]}
                     disableColumnFilter
                     disableColumnSelector
                     disableDensitySelector
                     getRowId={(row) => row._id}
                     columns={columns}
-                    rows={postData}
+                    rows={userData}
                     slots={{
                         toolbar: GridToolbar,
                         noRowsOverlay: () => {
-                            if (postsIsLoading) {
+                            if (usersIsLoading) {
                                 return <Loading open={true}/>
                             }
                             return <div>No rows</div>;
@@ -231,4 +232,6 @@ export default function async() {
             </div>
         </MyMenu>
     )
+
 }
+

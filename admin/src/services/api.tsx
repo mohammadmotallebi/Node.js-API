@@ -112,6 +112,44 @@ export const api = createApi({
                 method: 'DELETE',
             }),
         }),
+        users: build.query({
+            query: () => ({
+                url: 'users',
+                method: 'POST',
+            }),
+        }),
+        createUser: build.query({
+            query: (body) => ({
+                url: 'user/create',
+                method: 'POST',
+                body
+            }),
+        }),
+        userById: build.query({
+            query: (id) => ({
+                url: `user/${id}`,
+                method: 'GET',
+            }),
+        }),
+        updateUser: build.query({
+            query: (body) => ({
+                url: `user/update`,
+                method: 'PUT',
+                body
+            }),
+        }),
+        deleteUser: build.query({
+            query: (id) => ({
+                url: `user/${id}/delete`,
+                method: 'DELETE',
+            }),
+        }),
+        roles: build.query({
+            query: () => ({
+                url: `roles`,
+                method: 'POST',
+            }),
+        }),
     })
 });
 
@@ -125,6 +163,12 @@ export const {
     useLazyCreatePostQuery,
     useLazyPostByIdQuery,
     useLazyUpdatePostQuery,
-    useLazyDeletePostQuery
+    useLazyDeletePostQuery,
+    useLazyUsersQuery,
+    useLazyCreateUserQuery,
+    useLazyUserByIdQuery,
+    useLazyUpdateUserQuery,
+    useLazyDeleteUserQuery,
+    useLazyRolesQuery,
 } = api;
 export const {reducer, middleware} = api;

@@ -5,7 +5,7 @@ class UserController {
     async getAllUsers(req, res) {
         const filter = req.body;
         try {
-            const users = await UserModel.find(filter);
+            const users = await UserModel.find(filter).and([{deleted: false}])
             res.status(200).json(users);
         } catch (error) {
             res.status(500).json({ error: error });
@@ -70,8 +70,9 @@ class UserController {
     // Soft Delete user (set deleted to true)
     async deleteUser(req, res) {
         try {
-            await UserModel.findByIdAndUpdate(req.params.id, {deleted: true});
-            res.status(200).json({message: 'User deleted successfully!'});
+            const user = await UserModel.findByIdAndUpdate(req.params.id, {deleted: true});
+            const deletedUser = await UserModel.findById(user._id);
+            res.status(200).json(deletedUser);
         } catch (error) {
             res.status(500).json({error: error});
         }
@@ -92,6 +93,15 @@ class UserController {
         try {
             await UserModel.findByIdAndUpdate(req.params.id, {deleted: false});
             res.status(200).json({message: 'User restored successfully!'});
+        } catch (error) {
+            res.status(500).json({error: error});
+        }
+    }
+
+    async getAllRoles(req, res) {
+        try {
+            const roles = await UserModel.schema.path('role').enumValues;
+            res.status(200).json(roles);
         } catch (error) {
             res.status(500).json({error: error});
         }

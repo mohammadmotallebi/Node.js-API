@@ -25,6 +25,7 @@ userRouter.put('/user/:id/role-update', roleMiddleware(['*']), userController.up
 userRouter.delete('/user/:id/delete', roleMiddleware(['*']), userController.deleteUser);
 userRouter.put('/user/:id/update', roleMiddleware(['admin']), userController.updateAllUserInformation);
 userRouter.put('/user/:id/restore', roleMiddleware(['admin']), userController.restoreUser);
+userRouter.post('/roles', roleMiddleware(['*']), userController.getAllRoles);
 // Post routes
 userRouter.post('/posts', roleMiddleware(['*']), postController.getAllPosts);
 userRouter.get('/post/:id', roleMiddleware(['*']), postController.getPostById);
