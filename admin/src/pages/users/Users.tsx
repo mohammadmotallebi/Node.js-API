@@ -2,7 +2,7 @@ import MyMenu from "../../components/Menu";
 import Loading from "../../components/Loading";
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import {useLazyUsersQuery, useLazyDeleteUserQuery} from "../../services/api";
+import {useLazyUsersQuery, useLazyDeleteUserQuery, useLazyUpdatePasswordQuery} from "../../services/api";
 import {DataGrid} from '@mui/x-data-grid/DataGrid';
 import {
     GridToolbar,
@@ -17,6 +17,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CircularProgress from '@mui/material/CircularProgress';
 import ConfirmDialog from "../../components/ConfirmDialog";
+import {Password} from "@mui/icons-material";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import TextField from "@mui/material/TextField";
+import DialogActions from "@mui/material/DialogActions";
 
 export default function async() {
     const [userData, setUserData] = React.useState([])
@@ -26,6 +32,9 @@ export default function async() {
     const [deleteUser, {isLoading: deleteUserIsLoading}] = useLazyDeleteUserQuery()
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false)
+    const [newPassword, setNewPassword] = React.useState('')
+    const [updateUserPassword] = useLazyUpdatePasswordQuery()
+    const [passwordEditFormOpen, setPasswordEditFormOpen] = React.useState(false)
 
 
     const handleDelete = async (id: string) => {
@@ -89,6 +98,12 @@ export default function async() {
                     }}>
                         <EditIcon/>
                     </IconButton>
+                    <IconButton aria-label="update-password" color="warning" onClick={() => {
+                        setPasswordEditFormOpen(true)
+                        setRowID(params.row._id)
+                    }}>
+                        <Password />
+                    </IconButton>
                     { deleteUserIsLoading ? <CircularProgress size={12} /> :
                     <IconButton aria-label="delete" color={"error"} onClick={() => {
                         setOpen(true)
@@ -106,6 +121,13 @@ export default function async() {
         navigate('/users/create')
     }
 
+    const handleUpdatePassword = async () => {
+        await updateUserPassword({_id: rowID, password: newPassword}).then((data: any) => {
+            console.log('data', data)
+            setPasswordEditFormOpen(false)
+        })
+    }
+
 
 
     React.useEffect(() => {
@@ -118,6 +140,25 @@ export default function async() {
 
     return (
         <MyMenu>
+            <Dialog open={passwordEditFormOpen} onClose={() => setOpen(false)} fullWidth={true} maxWidth={"sm"}>
+                <DialogTitle>Update User Password ({rowID})</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="password"
+                        label="Password"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => setNewPassword(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button color="error" onClick={() => setPasswordEditFormOpen(false)}>Cancel</Button>
+                    <Button color="success" onClick={handleUpdatePassword}>Update Password</Button>
+                </DialogActions>
+            </Dialog>
             <ConfirmDialog open={open} text={"Are you sure you want to delete this user?"} title={"Delete User"}
                            actionText={"Delete"}
                            setOpen={() => {

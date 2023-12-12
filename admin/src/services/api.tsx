@@ -150,6 +150,13 @@ export const api = createApi({
                 method: 'POST',
             }),
         }),
+        updatePassword: build.query({
+            query: (body) => ({
+                url: `user/update-password`,
+                method: 'PUT',
+                body
+            }),
+        }),
     })
 });
 
@@ -170,5 +177,6 @@ export const {
     useLazyUpdateUserQuery,
     useLazyDeleteUserQuery,
     useLazyRolesQuery,
+    useLazyUpdatePasswordQuery,
 } = api;
 export const {reducer, middleware} = api;

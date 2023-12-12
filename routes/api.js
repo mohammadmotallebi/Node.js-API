@@ -24,7 +24,8 @@ userRouter.put('/update-me', roleMiddleware(['*']), userController.updateUser);
 userRouter.put('/update-my-password', roleMiddleware(['*']), userController.updatePassword);
 userRouter.put('/user/:id/role-update', roleMiddleware(['*']), userController.updateRole);
 userRouter.delete('/user/:id/delete', roleMiddleware(['*']), userController.deleteUser);
-userRouter.put('/user/:id/update', roleMiddleware(['admin']), userController.updateAllUserInformation);
+userRouter.put('/user/update', roleMiddleware(['admin']), userController.updateAllUserInformation);
+userRouter.put('/user/update-password', roleMiddleware(['admin']), userController.updatePassword);
 userRouter.put('/user/:id/restore', roleMiddleware(['admin']), userController.restoreUser);
 userRouter.post('/roles', roleMiddleware(['*']), userController.getAllRoles);
 // Post routes
@@ -37,7 +38,13 @@ userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), pos
 // Tag routes
 userRouter.post('/tags', roleMiddleware(['*']), postController.getAllTags);
 
-
+userRouter.get('/unhash', (req, resp) => {
+    const bcrypt = require('bcrypt');
+    var stored_hash = '$2b$10$j6k3vHCafY9/prqNLkNrvOZfwniIH3cvqX6rc85sHRnaPB4EAHIPG'
+    bcrypt.compare('12345', stored_hash, function(err, res) {
+        resp.status(200).json({res: res});
+    });
+})
 
 module.exports = {
     guest: guestRouter,

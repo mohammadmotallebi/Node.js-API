@@ -5,7 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
-import {PostAdd} from '@mui/icons-material';
+import {Edit, PostAdd} from '@mui/icons-material';
 import {useLazyRolesQuery, useLazyUserByIdQuery, useLazyUpdateUserQuery} from "../../services/api";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -67,8 +67,12 @@ const CreateUser = () => {
         })
     }, [userDataIsSuccess])
 
-    const handleAddUser = async () => {
+    const handleEditUser = async () => {
         console.log('user', user)
+        if(user.name === '' || user.email === '' || user.password === '' || user.role === ''){
+            setError(true)
+            return
+        }
         await updateUser({...user}).then((data: any) => {
             console.log('data', data)
             navigate('/users')
@@ -110,24 +114,12 @@ const CreateUser = () => {
                     />
                 </div>
                 <div>
-                    <TextField
-                        sx={{marginBottom: 2}}
-                        fullWidth
-                        id="outlined-basic"
-                        label="Password"
-                        variant="outlined"
-                        error={error && user.password === ''}
-                        helperText={error && user.password === '' ? 'Password is required' : ''}
-                        value={user.password}
-                        onChange={(e) => setUser({...user, password: e.target.value})}
-                    />
-                </div>
-                <div>
                     <Autocomplete
                         sx={{marginBottom: 2}}
                         fullWidth
                         disablePortal
                         id="combo-box-demo"
+                        value={user.role}
                         options={rolesArray}
                         onChange={(e: any, newValue: any) => {
                             setUser({...user, role: newValue})
@@ -140,11 +132,11 @@ const CreateUser = () => {
             </CardContent>
             <CardActions>
                 <Button
-                    onClick={handleAddUser}
+                    onClick={handleEditUser}
                     variant="contained"
-                    size="small" color={'success'} startIcon={<PostAdd/>}
+                    size="small" color={'success'} startIcon={<Edit/>}
                 >
-                    Create User
+                    Edit User
                 </Button>
             </CardActions>
         </Card>

@@ -22,16 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
   },
-  "paths": {
-    "@/*": ["./src/*"],
-    "@components/*": ["./src/app/components/*"],
-    "@redux/*": ["./src/app/redux/*"],
-    "@utils/*": ["./src/app/utils/*"],
-    "@layout": ["./src/app/pages/layout.tsx"],
-    "@pages/*": ["./src/app/pages/*"],
-    "@services/*": ["./src/app/services/*"],
-    "@config": ["../config.json"]
-  },
   "include": [
     "src",
     "src/**/*.ts", "src/**/*.tsx",

@@ -25,7 +25,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import {useLocation} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import {
     DashboardTwoTone, People
 } from "@mui/icons-material";
@@ -120,6 +120,8 @@ export default function MyMenu({children}: { children: React.ReactNode }) {
         React.useState<null | HTMLElement>(null);
     useDispatch<AppDispatch>();
     const [profileModalOpen, setProfileModalOpen] = React.useState(false);
+
+    const navigate = useNavigate()
 
     const [logout] = useLazyLogoutQuery()
 
@@ -386,7 +388,12 @@ export default function MyMenu({children}: { children: React.ReactNode }) {
                                     <StyledBreadcrumb
                                         key={index}
                                         component="a"
-                                        href={(pathname !== pathname.split(item)[0] + item) ? pathname.split(item)[0] + item : '#'}
+                                          onClick={(e) => {
+                                            e.preventDefault()
+                                            if (pathname !== pathname.split(item)[0] + item){
+                                                navigate(pathname.split(item)[0] + item)
+                                            }
+                                        }}
                                         label={item}
                                     />
                                 )

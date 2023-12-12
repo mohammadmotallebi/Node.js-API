@@ -31,14 +31,8 @@ class UserController {
     // Update user's password
     async updatePassword(req, res) {
         try {
-            const {password, newPassword} = req.body;
-            const user = await UserModel.findById(req.params.id);
-            const isPasswordCorrect = await bcrypt.compare(password, user.password);
-            if (!isPasswordCorrect) {
-                return res.status(401).json({error: 'Incorrect Credentials!'});
-            }
-            const hashedPassword = await bcrypt.hash(newPassword, 10);
-            await UserModel.findByIdAndUpdate(req.params.id, {password: hashedPassword});
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            await UserModel.findByIdAndUpdate(req.body._id, {password: hashedPassword});
             res.status(200).json({message: 'Password updated successfully!'});
         } catch (error) {
             res.status(500).json({error: error});
@@ -71,7 +65,7 @@ class UserController {
     async updateUser(req, res) {
         try {
             const {name, email} = req.body;
-            await UserModel.findByIdAndUpdate(req.params.id, {name: name, email: email});
+            await UserModel.findByIdAndUpdate(req.body._id, {name: name, email: email});
             res.status(200).json({message: 'User updated successfully!'});
         } catch (error) {
             res.status(500).json({error: error});
@@ -91,9 +85,9 @@ class UserController {
 
     async updateAllUserInformation(req, res) {
         try {
-            const {name, email, password, role} = req.body;
-            const hashedPassword = await bcrypt.hash(password, 10);
-            await UserModel.findByIdAndUpdate(req.params.id, {name: name, email: email, password: hashedPassword, role: role});
+            const {name, email, role} = req.body;
+            // const hashedPassword = await bcrypt.hash(password, 10);
+            await UserModel.findByIdAndUpdate(req.body._id, {name: name, email: email, role: role});
             res.status(200).json({message: 'User updated successfully!'});
         } catch (error) {
             res.status(500).json({error: error});
