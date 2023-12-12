@@ -6,22 +6,27 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
 import {PostAdd} from '@mui/icons-material';
-import {useLazyRolesQuery, useLazyCreateUserQuery} from "../../services/api";
+import {useLazyRolesQuery, useLazyUserByIdQuery, useLazyUpdateUserQuery} from "../../services/api";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useLocation, useNavigate } from "react-router-dom";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import {Autocomplete, CardHeader} from "@mui/material";
 
 const CreateUser = () => {
     const [rolesArray, setRolesArray] = React.useState([]);
     const [roles, {isSuccess}] = useLazyRolesQuery()
-    const [createUser] = useLazyCreateUserQuery()
+    const [updateUser] = useLazyUpdateUserQuery()
+    const [userData, {isSuccess: userDataIsSuccess}] = useLazyUserByIdQuery()
     const [open, setOpen] = React.useState(false);
+    const [error, setError] = React.useState(false);
+
     const [newRole, setNewRole] = React.useState('');
     const [user, setUser] = React.useState({
         name: '',
@@ -29,6 +34,9 @@ const CreateUser = () => {
         password: '',
         role: ''
     })
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         roles(
@@ -52,73 +60,93 @@ const CreateUser = () => {
         setOpen(false)
     };
 
+    React.useEffect(() => {
+        userData(location.state.id).then((data: any) => {
+            console.log('userData', data)
+            setUser(data.data)
+        })
+    }, [userDataIsSuccess])
+
     const handleAddUser = async () => {
         console.log('user', user)
-        await createUser(user).then((data: any) => {
+        await updateUser({...user}).then((data: any) => {
             console.log('data', data)
-            window.location.href = '/users'
+            navigate('/users')
         })
     }
 
     return (
         <Card sx={{
-            width: 500,
-            margin: 'auto',
-            marginTop: 100
+            minWidth: 275,
+            '& .MuiTextField-root': {m: 1, width: '50ch'},
         }}>
+            <CardHeader title="Create User"/>
             <CardContent>
-                <h1>Create User</h1>
-                <TextField
-                    sx={{marginBottom: 2}}
-                    fullWidth
-                    id="outlined-basic"
-                    label="Name"
-                    variant="outlined"
-                    value={user.name}
-                    onChange={(e) => setUser({...user, name: e.target.value})}
-                />
-                <TextField
-                    sx={{marginBottom: 2}}
-                    fullWidth
-                    id="outlined-basic"
-                    label="Email"
-                    variant="outlined"
-                    value={user.email}
-                    onChange={(e) => setUser({...user, email: e.target.value})}
-                />
-                <TextField
-                    sx={{marginBottom: 2}}
-                    fullWidth
-                    id="outlined-basic"
-                    label="Password"
-                    variant="outlined"
-                    value={user.password}
-                    onChange={(e) => setUser({...user, password: e.target.value})}
-                />
-                <FormControl sx={{marginBottom: 2}} fullWidth>
-                    <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={user.role}
-                        label="Role"
-                        onChange={(e: SelectChangeEvent) => setUser({...user, role: e.target.value})}
-                    >
-                        {rolesArray.map((item: any) => (
-                            <MenuItem value={item._id}>{item.name}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                <div>
+                    <TextField
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        id="outlined-basic"
+                        label="Name"
+                        variant="outlined"
+                        value={user.name}
+                        error={error && user.name === ''}
+                        helperText={error && user.name === '' ? 'Name is required' : ''}
+                        required
+                        onChange={(e) => setUser({...user, name: e.target.value})}
+                    />
+                </div>
+                <div>
+                    <TextField
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        id="outlined-basic"
+                        label="Email"
+                        variant="outlined"
+                        error={error && user.email === ''}
+                        helperText={error && user.email === '' ? 'Email is required' : ''}
+                        value={user.email}
+                        onChange={(e) => setUser({...user, email: e.target.value})}
+                    />
+                </div>
+                <div>
+                    <TextField
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        id="outlined-basic"
+                        label="Password"
+                        variant="outlined"
+                        error={error && user.password === ''}
+                        helperText={error && user.password === '' ? 'Password is required' : ''}
+                        value={user.password}
+                        onChange={(e) => setUser({...user, password: e.target.value})}
+                    />
+                </div>
+                <div>
+                    <Autocomplete
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        disablePortal
+                        id="combo-box-demo"
+                        options={rolesArray}
+                        onChange={(e: any, newValue: any) => {
+                            setUser({...user, role: newValue})
+                        }}
+                        renderInput={(params) =>
+                            <TextField {...params}
+                                       error={error && user.role === ''} helperText={error && user.role === '' ? 'Role is required' : ''} label="Role" />}
+                    />
+                </div>
+            </CardContent>
+            <CardActions>
                 <Button
                     onClick={handleAddUser}
                     variant="contained"
-                    endIcon={<PostAdd/>}
-                    sx={{marginTop: 2}}
-                    fullWidth
+                    size="small" color={'success'} startIcon={<PostAdd/>}
                 >
                     Create User
                 </Button>
-            </CardContent>
+            </CardActions>
         </Card>
     );
 
