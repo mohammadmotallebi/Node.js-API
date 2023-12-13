@@ -1,5 +1,5 @@
 {
-  "API_URL": "http://localhost:3000/api",
+  "API_URL": "http://localhost:8050/api",
   "X_API_KEY": "x4CsiyWKKNSl1P3FS2vWPwiGhwTLdqUCVynogB3rEvFtRJLTs8aEBZywfAAL",
   "HEADER": {
     "Content-Type": "application/json",

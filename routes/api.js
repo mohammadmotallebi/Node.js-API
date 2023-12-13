@@ -7,7 +7,9 @@ const apiKeyMiddleware = require('../middlewares/apiKeyMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 const postController = require('../controllers/postController');
-
+const path = require('path');
+const {glob} = require('glob')
+const fs = require('fs');
 
 guestRouter.use(apiKeyMiddleware);
 guestRouter.post('/register', authController.register);
@@ -38,13 +40,39 @@ userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), pos
 // Tag routes
 userRouter.post('/tags', roleMiddleware(['*']), postController.getAllTags);
 
-userRouter.get('/unhash', (req, resp) => {
-    const bcrypt = require('bcrypt');
-    var stored_hash = '$2b$10$j6k3vHCafY9/prqNLkNrvOZfwniIH3cvqX6rc85sHRnaPB4EAHIPG'
-    bcrypt.compare('12345', stored_hash, function(err, res) {
-        resp.status(200).json({res: res});
-    });
-})
+userRouter.get('/read-mdx', async (req, resp) => {
+    // get .md file list  from ../frontend/content
+    //requiring path and fs modules
+
+
+    let fileContents = [];
+//joining path of directory
+    const directoryPath = path.join(__dirname, '../frontend/content');
+
+    const files = await glob(directoryPath + '/**/*.md');
+
+    files.forEach(function (file) {
+        // read file content
+        const filePath = file;
+        console.log(filePath)
+        const fileContent = fs.readFileSync(filePath,  { encoding: 'utf8' });
+        fileContents.push(fileContent);
+    }
+    );
+    return resp.json({fileContents: fileContents});
+
+
+        // console.log(files)
+        // files.forEach(function (file) {
+        //     // read file content
+        //     const filePath = file;
+        //     console.log(filePath)
+        //     // const fileContent = fs.readFileSync(filePath,  { encoding: 'utf8' });
+        //     // fileContents.push(fileContent);
+        //
+        // });
+        // return resp.json({fileContents: fileContents});
+});
 
 module.exports = {
     guest: guestRouter,

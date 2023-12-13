@@ -7,7 +7,7 @@ const methodOverride = require('method-override')
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8050;
 
 function logErrors (err, req, res, next) {
     console.error(err.stack)
