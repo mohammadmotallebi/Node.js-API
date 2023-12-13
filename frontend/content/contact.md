@@ -23,11 +23,11 @@ Use the form on this page or get in touch by other means.
 <Sep size="12" />
 
 <small>
-  <Icon src="/icons/call.svg" className="inline mr-2 align-middle fill-current text-omega-500" /> Phone: (888) 777-6666
+  <Icon src="/icons/call.svg" className="inline mr-2 -mt-2 align-middle fill-current text-omega-500" /> Phone: (587) 968-7409
 
-  <Icon src="/icons/mail.svg" className="mr-2 inline align-middle fill-current text-omega-500" /> Email: hello@carl.io
+  <Icon src="/icons/mail.svg" className="mr-2 -mt-2 inline align-middle fill-current text-omega-500" /> Email: mohamad.motalebi@gmail.com
 
-  <Icon src="/icons/logo-linkedin.svg" className="mr-2 inline align-middle fill-current text-omega-500" /> Linkedin: [CarlHanson](http://linkedin.com/vercel)
+  <Icon src="/icons/logo-linkedin.svg" className="mr-2 -mt-2 inline align-middle fill-current text-omega-500" /> Linkedin: [Mohammad Motalebi](https://www.linkedin.com/in/mohammad-motalebi/)
 
-  <Icon src="/icons/logo-twitter.svg" className="mr-2 inline align-middle fill-current text-omega-500" /> Twitter: [@CarlHanson](http://twitter.com/vercel)
+  <Icon src="/icons/logo-github.svg" className="mr-2 -mt-2 inline align-middle fill-current text-omega-500" /> Github: [@MohammadMotallebi](https://github.com/mohammadmotallebi)
 </small>

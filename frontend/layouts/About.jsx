@@ -5,6 +5,7 @@ import Typewriter from '@/components/Typewriter'
 import Reveal from '@/components/Reveal'
 import Image from '@/components/Image'
 import Icon from '@/components/Icon'
+import {IoLogoGithub} from "react-icons/io";
 
 const History = ({ title, list }) => (
   <>

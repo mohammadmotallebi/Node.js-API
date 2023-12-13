@@ -28,8 +28,8 @@ class MdxController {
         return res.json({fileContent: fileContent});
     }
     async saveMdx(req, res) {
-        const fileContent = req.body.fileContent;
-        const filePath = req.body.filePath;
+        const fileContent = req.body.content;
+        const filePath = req.body.path;
         const file = await fs.writeFileSync(filePath, fileContent, {encoding:'utf8', flag:'w'});
         return res.json({file: file});
     }

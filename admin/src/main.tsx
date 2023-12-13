@@ -17,6 +17,7 @@ import Users from "./pages/users/Users";
 import CreateUser from "./pages/users/Create";
 import EditUser from "./pages/users/Edit";
 import MDX from "./pages/MDXContents/MDX";
+import EditMDX from "./pages/MDXContents/Edit";
 import config from "../../config.json";
 import NotFound from "./pages/errors/NotFound";
 
@@ -88,6 +89,11 @@ const router = createBrowserRouter([
     {
         path: "mdx-files",
         element: <MDX/>,
+        loader: authenticate
+    },
+    {
+        path: "mdx-files/edit",
+        element: <EditMDX />,
         loader: authenticate
     },
     {

@@ -1,4 +1,4 @@
-----
+---
 layout: Home
 seo:
   title: Web Developer
@@ -13,26 +13,23 @@ images:
     alt: my photo
 ---
 
-# <Typewriter>Carl Hanson</Typewriter>
+# <Typewriter style={{fontSize:'52px'}}>Mohammad Motalebi</Typewriter>
 
-# *Web Developer* <span>&</span> *Growth Consultant*
+# *Full Stack Developer*
 
 <Sep size={12} />
 
-Sometimes five Imprimaturs are seen together dialogue-wise in the
-piazza of one title-page, complimenting and ducking each to other with
-their shaven reverences, whether the author, who stands by in
-perplexity at the foot of his epistle, shall to the press or to the
-sponge.
-
+<span  style={{textAlign:'justify'}} >
+Full-Stack Web Developer with 10 years of Front-End and Back-End Developing and design expertise. Scripting languages like JavaScript, HTML, CSS, jQuery, and the Bootstrap framework are all things I'm proficient in. With React.js and React libraries like Redux, Router 6, Redux-Toolkit, Material-UI, I have 5 years or more of experience as well. I've used Node.js and the Express Framework for roughly 5 years, along with MongoDB, MySQL, and Microsoft SQL Server for 6 years each.
+</span>
 
 
 ---achievements
-- number: 6+
+- number: 10+
   text: Years of experience
-- number: 60+
+- number: 40+
   text: Projects Completed
-- number: 5
+- number: 4
   text: OpenSource Libraries
 ---
 

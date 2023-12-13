@@ -8,7 +8,7 @@ seo:
 
 
 ---personal_info
-name: CARL HANSON
+name: Mohammad Motalebi
 images:
   - src: /about.jpg
     alt: my image
@@ -44,84 +44,69 @@ title: I'm Specialized in
 list:
   - Front-End Design
   - Back-End Development
+  - Full Stack Development 
   - Modern Frameworks
 ---
 
 
 
 ---skills[0]
-title: Back-End Development
+title: Full Stack Development
 list:
+  - title: JavaScript 
+    level: 4
+    icon:
+      src: /icons/javascript-svgrepo-com.svg
+  - title: TypeScript
+    level: 4
+    icon:
+      src: /icons/typescript-svgrepo-com.svg
   - title: Node.js
-    level: 1
+    level: 4
     icon:
       src: /icons/nodedotjs.svg
-  - title: Prisma
-    level: 3
-    icon:
-      src: /icons/prisma.svg
-  - title: Svelte
-    level: 4
-    icon:
-      src: /icons/svelte.svg
-  - title: HTML5
-    level: 5
-    icon:
-      src: /icons/html5.svg
-  - title: Solidity
-    level: 2
-    icon:
-      src: /icons/solidity.svg
----
-
-
-
----skills[1]
-########################################
-### Skills
-########################################
-title: Front-End UI/UX Design
-list:
-  - title: JavaScript
-    level: 4
-    icon:
-      src: /icons/javascript.svg
   - title: React
-    level: 3
-    icon:
-      src: /icons/react.svg
-  - title: Redux
     level: 4
     icon:
-      src: /icons/redux.svg
-  - title: GraphQL
-    level: 2
-    icon:
-      src: /icons/graphql.svg
-  - title: Node.js
+      src: /icons/logo-react.svg
+  - title: Laravel
     level: 4
     icon:
-      src: /icons/nodedotjs.svg
-  - title: Prisma
+      src: /icons/logo-laravel.svg
+  - title: Framework7
     level: 5
     icon:
-      src: /icons/prisma.svg
+      src: /icons/framework7-icon-svgrepo-com.svg
+  - title: Material-UI
+    level: 5
+    icon:
+      src: /icons/material-ui-svgrepo-com.svg
+  - title: MongoDB
+    level: 4
+    icon:
+      src: /icons/mongodb.svg
+  - title: SQL Server
+    level: 4
+    icon:
+      src: /icons/microsoftsqlserver-svgrepo-com.svg
+  - title: MySQL
+    level: 4
+    icon:
+      src: /icons/mysql.svg
 ---
-
-
 
 ---history[0]
 title: Employment
 list:
-  - name: MetaVerse Inc.
-    description: Web3 Developer
-    date: 2020-Present
-  - name: Vircil Intl Co..
-    description: Back-End Developer and Designer
-    date: 2018-2020
-  - name: Crowdcube Inc.
-    description: Technical Support
-    date: 2018-2015
+  - name: RallyAd Media
+    description: Senior Full Stack Developer & DevOps
+    date: Nov 2022-Oct 2023
+  - name: Ekaseb
+    description: Senior Full Stack Developer
+    date: Aug 2018-Sep 2022
+  - name: Laksar Co.
+    description: IT Manager & Full Stack Developer
+    date: Jan 2008-Aug 2018
 ---
 
 

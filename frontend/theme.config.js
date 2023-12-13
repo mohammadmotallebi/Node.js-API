@@ -9,6 +9,7 @@
 import { IoLogoTwitter, IoLogoInstagram, IoLogoLinkedin } from 'react-icons/io5'
 import { TfiHome, TfiPencilAlt } from 'react-icons/tfi'
 import { SlUser, SlBriefcase, SlEnvolope, SlTrophy } from 'react-icons/sl'
+import {IoLogoFacebook, IoLogoGithub} from "react-icons/io5";
 
 /**
  * Main Menu Items
@@ -18,42 +19,41 @@ export const menu = [
   {
     name: 'Home',
     slug: '/',
-    Icon: TfiHome,
-    number: 1,
+    Icon: TfiHome
   },
-  {
-    name: 'Home (2)',
-    slug: '/index-2',
-    Icon: TfiHome,
-    number: 2,
-  },
-  {
-    name: 'Home (3)',
-    slug: '/index-3',
-    Icon: TfiHome,
-    number: 3,
-  },
-  {
-    name: 'Home (4)',
-    slug: '/index-4',
-    Icon: TfiHome,
-    number: 4,
-  },
+  // {
+  //   name: 'Home (2)',
+  //   slug: '/index-2',
+  //   Icon: TfiHome,
+  //   number: 2,
+  // },
+  // {
+  //   name: 'Home (3)',
+  //   slug: '/index-3',
+  //   Icon: TfiHome,
+  //   number: 3,
+  // },
+  // {
+  //   name: 'Home (4)',
+  //   slug: '/index-4',
+  //   Icon: TfiHome,
+  //   number: 4,
+  // },
   {
     name: 'About',
     slug: '/about',
     Icon: SlUser,
   },
-  {
-    name: 'Services',
-    slug: '/services',
-    Icon: SlBriefcase,
-  },
-  {
-    name: 'Articles',
-    slug: '/blog',
-    Icon: TfiPencilAlt,
-  },
+  // {
+  //   name: 'Services',
+  //   slug: '/services',
+  //   Icon: SlBriefcase,
+  // },
+  // {
+  //   name: 'Articles',
+  //   slug: '/blog',
+  //   Icon: TfiPencilAlt,
+  // },
   {
     name: 'Projects',
     slug: '/projects',
@@ -72,18 +72,18 @@ export const menu = [
 
 export const social = [
   {
-    name: 'Twitter',
-    url: 'https://www.twitter.com/',
-    Icon: IoLogoTwitter,
+    name: 'Github',
+    url: 'https://github.com/mohammadmotallebi',
+    Icon: IoLogoGithub,
   },
   {
-    name: 'Instagram',
-    url: 'https://www.instagram.com/',
-    Icon: IoLogoInstagram,
+    name: 'Facebook',
+    url: 'https://www.facebook.com/mohammad.motallebi.3/',
+    Icon: IoLogoFacebook,
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/',
+    url: 'https://www.linkedin.com/in/mohammad-motalebi/',
     Icon: IoLogoLinkedin,
   },
 ]

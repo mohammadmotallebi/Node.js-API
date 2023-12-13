@@ -70,7 +70,7 @@ const columns: GridColDef[] = [
                                 onClick={() => {
                                     setRowID(params.row.path)
                                     console.log('params.row.path', params.row.path)
-                                    // navigate(`edit`,{ state: { id: params.row } })
+                                    navigate(`edit`,{ state: { id: params.row.path } })
                                 }}
                     >
                         <EditIcon/>

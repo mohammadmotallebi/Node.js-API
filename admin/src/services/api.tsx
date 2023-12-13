@@ -163,6 +163,20 @@ export const api = createApi({
                 method: 'GET',
             }),
         }),
+        saveMdx: build.query({
+            query: (body) => ({
+                url: `save-mdx`,
+                method: 'POST',
+                body
+            }),
+        }),
+        readMdx: build.query({
+            query: (path) => ({
+                url: `read-mdx`,
+                method: 'POST',
+                body: {path:path}
+            }),
+        }),
     })
 });
 
@@ -185,5 +199,7 @@ export const {
     useLazyRolesQuery,
     useLazyUpdatePasswordQuery,
     useLazyListMdxQuery,
+    useLazySaveMdxQuery,
+    useLazyReadMdxQuery,
 } = api;
 export const {reducer, middleware} = api;
