@@ -7,7 +7,7 @@ import {getCookieValue} from "./helpers";
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3000/api/',
+        baseUrl: 'http://localhost:8050/api/',
         credentials: 'include',
         prepareHeaders: (headers, {}) => {
             const token = getCookieValue('token')
@@ -157,6 +157,12 @@ export const api = createApi({
                 body
             }),
         }),
+        listMdx: build.query({
+            query: () => ({
+                url: `list-mdx`,
+                method: 'GET',
+            }),
+        }),
     })
 });
 
@@ -178,5 +184,6 @@ export const {
     useLazyDeleteUserQuery,
     useLazyRolesQuery,
     useLazyUpdatePasswordQuery,
+    useLazyListMdxQuery,
 } = api;
 export const {reducer, middleware} = api;

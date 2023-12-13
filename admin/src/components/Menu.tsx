@@ -27,7 +27,7 @@ import MenuItem from "@mui/material/MenuItem";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {useLocation, useNavigate} from "react-router-dom"
 import {
-    DashboardTwoTone, People
+    DashboardTwoTone, Description, People
 } from "@mui/icons-material";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../redux/store";
@@ -349,6 +349,7 @@ export default function MyMenu({children}: { children: React.ReactNode }) {
                         {"name": "Dashboard", "icon": <HouseTwoToneIcon/>, "link": "/"},
                         {"name": "Posts", "icon": <DashboardTwoTone/>, "link": "/posts"},
                         {"name": "Users", "icon": <People/>, "link": "/users"},
+                        {"name": "MDX Files", "icon": <Description/>, "link": "/mdx-files"}
                     ].map((text, index) => (
                         <ListItem key={index} disablePadding sx={{display: 'block'}} component="a" href={text.link}>
                             <ListItemButton

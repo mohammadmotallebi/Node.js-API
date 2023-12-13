@@ -7,13 +7,13 @@ const apiKeyMiddleware = require('../middlewares/apiKeyMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 const postController = require('../controllers/postController');
-const path = require('path');
-const {glob} = require('glob')
-const fs = require('fs');
+const mdxController = require('../controllers/mdxController');
+
 
 guestRouter.use(apiKeyMiddleware);
 guestRouter.post('/register', authController.register);
 guestRouter.post('/login', authController.login);
+guestRouter.post('/read-mdx', mdxController.readMdx);
 
 userRouter.use(apiKeyMiddleware).use(authMiddleware);
 userRouter.post('/auth', authController.checkAuth);
@@ -40,39 +40,8 @@ userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), pos
 // Tag routes
 userRouter.post('/tags', roleMiddleware(['*']), postController.getAllTags);
 
-userRouter.get('/read-mdx', async (req, resp) => {
-    // get .md file list  from ../frontend/content
-    //requiring path and fs modules
-
-
-    let fileContents = [];
-//joining path of directory
-    const directoryPath = path.join(__dirname, '../frontend/content');
-
-    const files = await glob(directoryPath + '/**/*.md');
-
-    files.forEach(function (file) {
-        // read file content
-        const filePath = file;
-        console.log(filePath)
-        const fileContent = fs.readFileSync(filePath,  { encoding: 'utf8' });
-        fileContents.push(fileContent);
-    }
-    );
-    return resp.json({fileContents: fileContents});
-
-
-        // console.log(files)
-        // files.forEach(function (file) {
-        //     // read file content
-        //     const filePath = file;
-        //     console.log(filePath)
-        //     // const fileContent = fs.readFileSync(filePath,  { encoding: 'utf8' });
-        //     // fileContents.push(fileContent);
-        //
-        // });
-        // return resp.json({fileContents: fileContents});
-});
+userRouter.post('/save-mdx', roleMiddleware(['*']), mdxController.saveMdx);
+userRouter.get('/list-mdx', roleMiddleware(['*']), mdxController.getMdxList);
 
 module.exports = {
     guest: guestRouter,
