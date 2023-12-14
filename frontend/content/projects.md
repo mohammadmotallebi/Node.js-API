@@ -18,16 +18,7 @@ repositories:
 
 Discover my most popular open-source projects on Github.
 
+<large>
+  <Icon src="/icons/logo-github.svg" className="mr-2 -mt-2 inline align-middle fill-current text-omega-500" /> Github: [@MohammadMotallebi](https://github.com/mohammadmotallebi)
+</large>
 
-
----projects
-collection:
-  path: /projects
-  sortBy: date
----
-
-<PageTitle>
-  ### Latest Projects
-</PageTitle>
-
-I have transformed ideas into remarkable digital products.

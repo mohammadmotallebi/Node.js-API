@@ -4,7 +4,7 @@ import NextImage from 'next/image'
 
 const Image = (props) => {
   const [isLoaded, setIsLoaded] = React.useState(false)
-  const { wrapperClassName, className, animation = 'fade-in', alt, quality = 90, ...rest } = props
+  const {width, height, wrapperClassName, className, animation = 'fade-in', alt, quality = 90, ...rest } = props
 
   const fx = {
     fadeIn: animation.includes('fade-in'),
@@ -53,6 +53,8 @@ const Image = (props) => {
         )}
         alt={alt}
         quality={quality}
+        width={width}
+        height={height}
         {...rest}
       />
     </div>

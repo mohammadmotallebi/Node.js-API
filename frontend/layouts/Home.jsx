@@ -12,8 +12,8 @@ const HeroPhoto = ({ main }) => (
       <div className="with-back-plate hidden md:block">
         <Image
           src={main.images[0].src}
-          width={main.images[0].width}
-          height={main.images[0].height}
+          width={500}
+          height={718}
           alt={main.images[0].alt}
           animation="mask-left"
           priority

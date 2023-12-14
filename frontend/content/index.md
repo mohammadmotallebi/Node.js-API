@@ -7,10 +7,14 @@ seo:
 
 ---main
 images:
-  - src: /hero.jpg
+  - src: /1FFAE0BF-2BC5-4838-BE1F-E1BA4C55C9BA.jpg
     alt: my photo
+    width: 500
+    height: 718
   - src: /hero-mobile.jpg
     alt: my photo
+    width: 300
+    height: 300
 ---
 
 # <Typewriter style={{fontSize:'52px'}}>Mohammad Motalebi</Typewriter>
