@@ -11,6 +11,7 @@ import FormRadio from '@/components/FormRadio'
 import Button from '@/components/Button'
 import { SlCheck } from 'react-icons/sl'
 import { config } from '../theme.config'
+import Image from "@/components/Image";
 
 const { inputs } = config.contactForm || {}
 
@@ -50,13 +51,17 @@ const Contact01 = ({ main = {} }) => {
   } = methods
 
   const onSubmit = async (data) => {
+    let formData = new FormData()
+    for ( let key in data ) {
+      formData.append(key, data[key]);
+    }
     try {
-      const res = await fetch(`/api/contact-form`, {
+      const res = await fetch(`/api/send`, {
         method: 'POST',
-        body: JSON.stringify(data),
+        mode: 'cors',
+        body: formData,
         headers: new Headers({
-          'Content-Type': 'application/json',
-          credentials: 'same-origin',
+          'Content-Type': 'multipart/form-data'
         }),
       })
       if (res.status === 201) {
@@ -88,51 +93,65 @@ const Contact01 = ({ main = {} }) => {
         </Reveal>
         <Reveal
           animation="fade-in zoom-in"
-          className="md:with-back-plate max-w-3xl border border-omega-700 md:before:bg-omega-700"
+          className={classNames(
+              'prose prose-invert relative z-10 flex flex-wrap md:m-auto'
+          )}
         >
-          <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="relative overflow-hidden shadow">
-                {isSubmitSuccessful && <SuccessMessage />}
-                <div className="bg-gradient-omega-900">
-                  {inputs?.map(({ legend, columns, fields }, i) => (
-                    <fieldset key={i} className="border-b border-dashed border-omega-700">
-                      <div className="bg-omega-800 p-5">
-                        <legend className="m-0 p-0">{legend}</legend>
-                      </div>
-                      <div
-                        className={classNames('grid gap-2 p-5', {
-                          'md:grid-cols-2': columns === 2,
-                          'md:grid-cols-3': columns === 3,
-                        })}
-                      >
-                        {fields.map((input, j) => {
-                          const Component = FormComponent[input.type]
-                          return input.type && Component ? (
-                            <div key={(input.id || input.name) + j} className="flex items-center">
-                              <Component {...input} {...register(input.id || input.name)} />
-                            </div>
-                          ) : null
-                        })}
-                      </div>
-                    </fieldset>
-                  ))}
-                </div>
-                <div className="bg-omega-900 px-4 pt-6 pb-8 text-left md:px-8">
-                  <ErrorMessage errors={errors} name="service" />
-                  <Button
-                    as="button"
-                    type="submit"
-                    size="sm"
-                    className="w-full sm:w-1/3"
-                    disabled={isSubmitting}
-                  >
-                    Submit
-                  </Button>
-                </div>
+          {main.images?.[0] && (
+              <div className="hidden md:block">
+                <Image
+                    src={main.images[0].src}
+                    width={500}
+                    height={718}
+                    alt={main.images[0].alt}
+                    animation="mask-left"
+                    priority
+                />
               </div>
-            </form>
-          </FormProvider>
+          )}
+          {/*<FormProvider {...methods}>*/}
+          {/*  <form onSubmit={handleSubmit(onSubmit)}>*/}
+          {/*    <div className="relative overflow-hidden shadow">*/}
+          {/*      {isSubmitSuccessful && <SuccessMessage />}*/}
+          {/*      <div className="bg-gradient-omega-900">*/}
+          {/*        {inputs?.map(({ legend, columns, fields }, i) => (*/}
+          {/*          <fieldset key={i} className="border-b border-dashed border-omega-700">*/}
+          {/*            <div className="bg-omega-800 p-5">*/}
+          {/*              <legend className="m-0 p-0">{legend}</legend>*/}
+          {/*            </div>*/}
+          {/*            <div*/}
+          {/*              className={classNames('grid gap-2 p-5', {*/}
+          {/*                'md:grid-cols-2': columns === 2,*/}
+          {/*                'md:grid-cols-3': columns === 3,*/}
+          {/*              })}*/}
+          {/*            >*/}
+          {/*              {fields.map((input, j) => {*/}
+          {/*                const Component = FormComponent[input.type]*/}
+          {/*                return input.type && Component ? (*/}
+          {/*                  <div key={(input.id || input.name) + j} className="flex items-center">*/}
+          {/*                    <Component {...input} {...register(input.id || input.name)} />*/}
+          {/*                  </div>*/}
+          {/*                ) : null*/}
+          {/*              })}*/}
+          {/*            </div>*/}
+          {/*          </fieldset>*/}
+          {/*        ))}*/}
+          {/*      </div>*/}
+          {/*      <div className="bg-omega-900 px-4 pt-6 pb-8 text-left md:px-8">*/}
+          {/*        <ErrorMessage errors={errors} name="service" />*/}
+          {/*        <Button*/}
+          {/*          as="button"*/}
+          {/*          type="submit"*/}
+          {/*          size="sm"*/}
+          {/*          className="w-full sm:w-1/3"*/}
+          {/*          disabled={isSubmitting}*/}
+          {/*        >*/}
+          {/*          Submit*/}
+          {/*        </Button>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </form>*/}
+          {/*</FormProvider>*/}
         </Reveal>
       </div>
     </div>

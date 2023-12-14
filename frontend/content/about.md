@@ -44,17 +44,6 @@ My passion is to deliver high-quality digital solutions that enhance user experi
 
 
 
----cta
----
-## Ready to discuss your project?
-
-Let's super-charge your business today!
-
-<Button href="/contact">
-  Get a Free Price Quote
-</Button>
-
-
 
 ---skills_header
 title: I'm Specialized in

@@ -41,25 +41,6 @@ Full-Stack Web Developer with 10 years of Front-End and Back-End Developing and 
 
 ---cta
 ---
-<Button href="/contact" size="lg">
+<Button href="/Mohammad-Motalebi-nfsd-202023.pdf" size="lg">
   Download Resume
 </Button>
-
-
-
----companies
-title: Trusted By
-list:
-  - name: Company 1
-    icon:
-      src: /icons/logo-1.svg
-  - name: Company 2
-    icon:
-      src: /icons/logo-3.svg
-  - name: Company 3
-    icon:
-      src: /icons/logo-3.svg
-  - name: Company 4
-    icon:
-      src: /icons/logo-4.svg
----
