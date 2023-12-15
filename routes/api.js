@@ -8,6 +8,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 const postController = require('../controllers/postController');
 const mdxController = require('../controllers/mdxController');
+const jobController = require('../controllers/jobController');
 
 
 guestRouter.use(apiKeyMiddleware);
@@ -40,8 +41,17 @@ userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), pos
 // Tag routes
 userRouter.post('/tags', roleMiddleware(['*']), postController.getAllTags);
 
+// MDX routes
 userRouter.post('/save-mdx', roleMiddleware(['*']), mdxController.saveMdx);
 userRouter.get('/list-mdx', roleMiddleware(['*']), mdxController.getMdxList);
+
+// Job routes
+userRouter.post('/jobs', roleMiddleware(['*']), jobController.getAllJobs);
+userRouter.get('/job/:id', roleMiddleware(['*']), jobController.getJobById);
+userRouter.post('/job/create', roleMiddleware(['admin','super-admin']), jobController.createJob);
+// userRouter.put('/job/update', roleMiddleware(['admin','super-admin']), jobController.updateJob);
+userRouter.delete('/job/:id/delete', roleMiddleware(['admin','super-admin']), jobController.deleteJob);
+userRouter.put('/job/:id/restore', roleMiddleware(['admin','super-admin']), jobController.restoreJob);
 
 module.exports = {
     guest: guestRouter,
