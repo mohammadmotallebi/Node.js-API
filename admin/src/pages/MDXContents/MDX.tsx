@@ -15,8 +15,6 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import CircularProgress from '@mui/material/CircularProgress';
-import ConfirmDialog from "../../components/ConfirmDialog";
 
 
 export default function async() {
@@ -44,12 +42,14 @@ const columns: GridColDef[] = [
         field: '_id',
         headerName: 'ID',
         width: 150,
+        flex: .5,
         editable: false,
     },
     {
         field: 'path',
         headerName: 'Path',
         width: 400,
+        flex: 1,
         editable: false,
     },
     {
@@ -57,7 +57,7 @@ const columns: GridColDef[] = [
         headerName: "Actions",
         sortable: false,
         filterable: false,
-        flex: 0.4,
+        flex: 0.2,
         minWidth: 200,
         renderCell: (params) => {
             return (

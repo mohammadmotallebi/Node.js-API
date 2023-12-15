@@ -351,7 +351,7 @@ export default function MyMenu({children}: { children: React.ReactNode }) {
                         {"name": "Users", "icon": <People/>, "link": "/users"},
                         {"name": "MDX Files", "icon": <Description/>, "link": "/mdx-files"}
                     ].map((text, index) => (
-                        <ListItem key={index} disablePadding sx={{display: 'block'}} component="a" href={text.link}>
+                        <ListItem key={index} disablePadding sx={{display: 'block'}} component="a" onClick={() => navigate(text.link)}>
                             <ListItemButton
                                 selected={pathname.includes(text.link) && text.link !== '/'}
                                 sx={{
