@@ -64,29 +64,31 @@ export default function async() {
         {
             field: "location",
             headerName: "Location",
-            sortable: true,
+            sortable: false,
             filterable: true,
             flex: 0.3,
             minWidth: 300,
+            disableColumnMenu: true,
             renderCell: (params) => {
                 return (
                     <>
-                    <Link href="#" onClick={() => {
-                        params.api.setQuickFilterValues([params.row.location[0].replace(/\s/g, '')])
+                    <Link href="#" onClick={(e) => {
+                        params.api.setQuickFilterValues([e.target.text])
                     }}>
-                        {params.row.location[0]}
+                        {params.row.location.city}
                     </Link>
                         &nbsp; | &nbsp;
-                    <Link href="#" onClick={() => {
-                        params.api.setQuickFilterValues([params.row.location[1].replace(/\s/g, '')])
+                    <Link href="#" onClick={(e) => {
+                        console.log('e', e)
+                        params.api.setQuickFilterValues([e.target.text])
                     }}>
-                        {params.row.location[1]}
+                        {params.row.location.province}
                     </Link>
                         &nbsp; | &nbsp;
-                        <Link href="#" onClick={() => {
-                            params.api.setQuickFilterValues([params.row.location[2].replace(/\s/g, '')])
+                        <Link href="#" onClick={(e) => {
+                            params.api.setQuickFilterValues([e.target.text])
                         }}>
-                            {params.row.location[2]}
+                            {params.row.location.country}
                         </Link>
                     </>
                 )

@@ -1,4 +1,5 @@
 const JobModel = require('../models/jobModel');
+const upload = require('../middlewares/uploadMiddleware');
 
 class JobController {
     async getAllJobs(req, res) {
@@ -22,7 +23,7 @@ class JobController {
 
     async createJob(req, res) {
         try {
-            const job = await JobModel.create(req.body);
+            const job = await JobModel.create(...req.body, {user_id: req.user._id});
             res.status(200).json(job);
         } catch (error) {
             res.status(500).json({ error: error });
@@ -49,6 +50,14 @@ class JobController {
         } catch (error) {
             res.status(500).json({ error: error });
         }
+    }
+    uploadImage(req, res) {
+        upload.array('files', 10)(req, res, function (err) {
+           if (err) {
+                res.status(500).json({ error: err });
+            }
+            res.status(200).json(req.files);
+        })
     }
 
 

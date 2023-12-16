@@ -21,6 +21,7 @@ import Job from "./pages/jobs/Job";
 import EditMDX from "./pages/MDXContents/Edit";
 import config from "../../config.json";
 import NotFound from "./pages/errors/NotFound";
+import CreateJob from "./pages/jobs/Create.tsx";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -100,6 +101,11 @@ const router = createBrowserRouter([
     {
         path: "jobs",
         element: <Job />,
+        loader: authenticate
+    },
+    {
+        path: "jobs/create",
+        element: <CreateJob />,
         loader: authenticate
     },
     {

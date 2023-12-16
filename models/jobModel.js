@@ -17,7 +17,7 @@ const jobSchema = new mongoose.Schema({
         required: [true, 'Job services are required.']
     },
     location: {
-        type: Array,
+        type: Object,
         required: [true, 'Job location is required.']
     },
     address: {

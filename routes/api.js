@@ -52,6 +52,7 @@ userRouter.post('/job/create', roleMiddleware(['admin','super-admin']), jobContr
 // userRouter.put('/job/update', roleMiddleware(['admin','super-admin']), jobController.updateJob);
 userRouter.delete('/job/:id/delete', roleMiddleware(['admin','super-admin']), jobController.deleteJob);
 userRouter.put('/job/:id/restore', roleMiddleware(['admin','super-admin']), jobController.restoreJob);
+userRouter.post('/job/upload-image', roleMiddleware(['admin','super-admin']), jobController.uploadImage);
 
 module.exports = {
     guest: guestRouter,
