@@ -349,6 +349,7 @@ export default function MyMenu({children}: { children: React.ReactNode }) {
                         {"name": "Dashboard", "icon": <HouseTwoToneIcon/>, "link": "/"},
                         {"name": "Posts", "icon": <DashboardTwoTone/>, "link": "/posts"},
                         {"name": "Users", "icon": <People/>, "link": "/users"},
+                        {"name": "Jobs", "icon": <People/>, "link": "/jobs"},
                         {"name": "MDX Files", "icon": <Description/>, "link": "/mdx-files"}
                     ].map((text, index) => (
                         <ListItem key={index} disablePadding sx={{display: 'block'}} component="a" onClick={() => navigate(text.link)}>

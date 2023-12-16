@@ -177,6 +177,34 @@ export const api = createApi({
                 body: {path:path}
             }),
         }),
+        // Job endpoints
+        jobs: build.query({
+            query: () => ({
+                url: `jobs`,
+                method: 'POST',
+            }),
+        }),
+        createJob: build.query({
+            query: (body) => ({
+                url: `job/create`,
+                method: 'POST',
+                body
+            }),
+        }),
+        updateJob: build.query({
+            query: (body) => ({
+                url: `job/update`,
+                method: 'PUT',
+                body
+            }),
+        }),
+        deleteJob: build.query({
+            query: (id) => ({
+                url: `job/${id}/delete`,
+                method: 'DELETE',
+            }),
+        }),
+
     })
 });
 
@@ -201,5 +229,9 @@ export const {
     useLazyListMdxQuery,
     useLazySaveMdxQuery,
     useLazyReadMdxQuery,
+    useLazyJobsQuery,
+    useLazyCreateJobQuery,
+    useLazyUpdateJobQuery,
+    useLazyDeleteJobQuery,
 } = api;
 export const {reducer, middleware} = api;
