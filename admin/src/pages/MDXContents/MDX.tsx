@@ -37,44 +37,44 @@ export default function async() {
             setListData(data.data)
         })
     }, [mdxFiles])
-const columns: GridColDef[] = [
-    {
-        field: '_id',
-        headerName: 'ID',
-        width: 150,
-        flex: .5,
-        editable: false,
-    },
-    {
-        field: 'path',
-        headerName: 'Path',
-        width: 400,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: "actions",
-        headerName: "Actions",
-        sortable: false,
-        filterable: false,
-        flex: 0.2,
-        minWidth: 200,
-        renderCell: (params) => {
-            return (
-                <ButtonGroup
-                    disableElevation
-                    variant="contained"
-                    aria-label="Disabled elevation buttons"
-                >
-                    <IconButton aria-label="edit" color="info"
-                                onClick={() => {
-                                    setRowID(params.row.path)
-                                    console.log('params.row.path', params.row.path)
-                                    navigate(`edit`,{ state: { id: params.row.path } })
-                                }}
+    const columns: GridColDef[] = [
+        {
+            field: '_id',
+            headerName: 'ID',
+            width: 150,
+            flex: .5,
+            editable: false,
+        },
+        {
+            field: 'path',
+            headerName: 'Path',
+            width: 400,
+            flex: 1,
+            editable: false,
+        },
+        {
+            field: "actions",
+            headerName: "Actions",
+            sortable: false,
+            filterable: false,
+            flex: 0.2,
+            minWidth: 200,
+            renderCell: (params) => {
+                return (
+                    <ButtonGroup
+                        disableElevation
+                        variant="contained"
+                        aria-label="Disabled elevation buttons"
                     >
-                        <EditIcon/>
-                    </IconButton>
+                        <IconButton aria-label="edit" color="info"
+                                    onClick={() => {
+                                        setRowID(params.row.path)
+                                        console.log('params.row.path', params.row.path)
+                                        navigate(`edit`, {state: {id: params.row.path}})
+                                    }}
+                        >
+                            <EditIcon/>
+                        </IconButton>
                         <IconButton aria-label="delete" color={"error"}
                                     onClick={() => {
                                         setRowID(params.row)
@@ -83,11 +83,11 @@ const columns: GridColDef[] = [
                         >
                             <DeleteIcon/>
                         </IconButton>
-                </ButtonGroup>
-            );
-        }
-    },
-];
+                    </ButtonGroup>
+                );
+            }
+        },
+    ];
 
     return (
         <MyMenu>

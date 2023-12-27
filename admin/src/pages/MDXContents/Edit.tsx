@@ -7,11 +7,10 @@ import Button from '@mui/material/Button';
 import MDEditor from '@uiw/react-md-editor';
 import {Edit} from '@mui/icons-material';
 import {useLazySaveMdxQuery, useLazyReadMdxQuery} from "../../services/api";
-import { useLocation } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import Slide, {SlideProps} from "@mui/material/Slide";
 import Alert from "@mui/material/Alert";
-
 
 
 const CreatePost = () => {
@@ -38,14 +37,12 @@ const CreatePost = () => {
         console.log('MDX Content', mdxContent)
         await saveMdx({...mdxContent}).then((data: any) => {
             console.log('data', data)
-                setOpen(true)
-               setMessage('Post updated successfully')
+            setOpen(true)
+            setMessage('Post updated successfully')
 
             // navigate('/mdx-files')
         })
     }
-
-
 
 
     // @ts-ignore

@@ -352,7 +352,8 @@ export default function MyMenu({children}: { children: React.ReactNode }) {
                         {"name": "Jobs", "icon": <People/>, "link": "/jobs"},
                         {"name": "MDX Files", "icon": <Description/>, "link": "/mdx-files"}
                     ].map((text, index) => (
-                        <ListItem key={index} disablePadding sx={{display: 'block'}} component="a" onClick={() => navigate(text.link)}>
+                        <ListItem key={index} disablePadding sx={{display: 'block'}} component="a"
+                                  onClick={() => navigate(text.link)}>
                             <ListItemButton
                                 selected={pathname.includes(text.link) && text.link !== '/'}
                                 sx={{
@@ -390,9 +391,9 @@ export default function MyMenu({children}: { children: React.ReactNode }) {
                                     <StyledBreadcrumb
                                         key={index}
                                         component="a"
-                                          onClick={(e) => {
+                                        onClick={(e) => {
                                             e.preventDefault()
-                                            if (pathname !== pathname.split(item)[0] + item){
+                                            if (pathname !== pathname.split(item)[0] + item) {
                                                 navigate(pathname.split(item)[0] + item)
                                             }
                                         }}

@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import {Editor} from '@tinymce/tinymce-react';
 import {PostAdd} from '@mui/icons-material';
 import {useLazyCreateJobQuery} from "../../services/api";
-import { FilePond, registerPlugin } from 'react-filepond'
+import {FilePond, registerPlugin} from 'react-filepond'
 import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
@@ -34,12 +34,11 @@ const CreateJob = () => {
         website: '',
         phone: '',
         images: [],
-        services:[],
+        services: [],
         address: '',
 
     })
     const [open, setOpen] = React.useState(false);
-
 
 
     const handleAddJob = async () => {
@@ -56,7 +55,7 @@ const CreateJob = () => {
             ...prevState,
             images: e.map((file: any) => file.file.name)
         }))
-        }
+    }
 
 
     return (
@@ -92,21 +91,21 @@ const CreateJob = () => {
                             label="City"
                             variant="outlined"
                             margin="normal"
-                            onChange={(e) => setJob({...job, location:{...job.location, city: e.target.value}})}
+                            onChange={(e) => setJob({...job, location: {...job.location, city: e.target.value}})}
                         />
                         <TextField
                             id="province"
                             label="Province"
                             variant="outlined"
                             margin="normal"
-                            onChange={(e) => setJob({...job, location:{...job.location, province: e.target.value}})}
+                            onChange={(e) => setJob({...job, location: {...job.location, province: e.target.value}})}
                         />
                         <TextField
                             id="country"
                             label="Country"
                             variant="outlined"
                             margin="normal"
-                            onChange={(e) => setJob({...job, location:{...job.location, country: e.target.value}})}
+                            onChange={(e) => setJob({...job, location: {...job.location, country: e.target.value}})}
                         />
                     </div>
                     <div>
@@ -166,16 +165,16 @@ const CreateJob = () => {
                             allowMultiple={true}
                             maxFiles={3}
                             server={
-                            {
-                                url: "http://localhost:8050/api/job/upload-image",
-                                process: {
-                                    withCredentials: true,
-                                    method: 'POST',
-                                    headers:{
-                                        'X-API-KEY': config.X_API_KEY
+                                {
+                                    url: "http://localhost:8050/api/job/upload-image",
+                                    process: {
+                                        withCredentials: true,
+                                        method: 'POST',
+                                        headers: {
+                                            'X-API-KEY': config.X_API_KEY
+                                        }
                                     }
-                                    }
-                            }}
+                                }}
                             name="files" /* sets the file input name, it's filepond by default */
                             labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
                         />

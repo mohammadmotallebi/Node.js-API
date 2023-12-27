@@ -95,17 +95,17 @@ const router = createBrowserRouter([
     },
     {
         path: "mdx-files/edit",
-        element: <EditMDX />,
+        element: <EditMDX/>,
         loader: authenticate
     },
     {
         path: "jobs",
-        element: <Job />,
+        element: <Job/>,
         loader: authenticate
     },
     {
         path: "jobs/create",
-        element: <CreateJob />,
+        element: <CreateJob/>,
         loader: authenticate
     },
     {

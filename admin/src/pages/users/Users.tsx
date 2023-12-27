@@ -102,15 +102,15 @@ export default function async() {
                         setPasswordEditFormOpen(true)
                         setRowID(params.row._id)
                     }}>
-                        <Password />
+                        <Password/>
                     </IconButton>
-                    { deleteUserIsLoading ? <CircularProgress size={12} /> :
-                    <IconButton aria-label="delete" color={"error"} onClick={() => {
-                        setOpen(true)
-                        setRowID(params.row._id)
-                    }}>
-                        <DeleteIcon/>
-                    </IconButton>
+                    {deleteUserIsLoading ? <CircularProgress size={12}/> :
+                        <IconButton aria-label="delete" color={"error"} onClick={() => {
+                            setOpen(true)
+                            setRowID(params.row._id)
+                        }}>
+                            <DeleteIcon/>
+                        </IconButton>
                     }
                 </ButtonGroup>
             )
@@ -127,7 +127,6 @@ export default function async() {
             setPasswordEditFormOpen(false)
         })
     }
-
 
 
     React.useEffect(() => {

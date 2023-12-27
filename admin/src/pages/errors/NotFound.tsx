@@ -1,7 +1,7 @@
-import { Box, Button, Container, Typography } from '@mui/material';
+import {Box, Button, Container, Typography} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import images from '../../components/Images';
-import { Home } from '@mui/icons-material';
+import {Home} from '@mui/icons-material';
 
 export default function Error() {
     return (
@@ -15,14 +15,20 @@ export default function Error() {
         >
             <Container maxWidth="md">
                 <Grid container spacing={2}>
-                    <Grid xs={6} sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+                    <Grid xs={6} sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
                         <Typography variant="h1">
                             404
                         </Typography>
                         <Typography variant="h6">
                             The page you’re looking for doesn’t exist.
                         </Typography>
-                        <Button sx={{mt:5, color:'white'}} size="large" startIcon={<Home />} variant="contained" color={'warning'} onClick={() => window.location.href = '/'}>Back Home</Button>
+                        <Button sx={{mt: 5, color: 'white'}} size="large" startIcon={<Home/>} variant="contained"
+                                color={'warning'} onClick={() => window.location.href = '/'}>Back Home</Button>
                     </Grid>
                     <Grid xs={6}>
                         <img

@@ -72,18 +72,18 @@ export default function async() {
             renderCell: (params) => {
                 return (
                     <>
-                    <Link href="#" onClick={(e) => {
-                        params.api.setQuickFilterValues([e.target.text])
-                    }}>
-                        {params.row.location.city}
-                    </Link>
+                        <Link href="#" onClick={(e) => {
+                            params.api.setQuickFilterValues([e.target.text])
+                        }}>
+                            {params.row.location.city}
+                        </Link>
                         &nbsp; | &nbsp;
-                    <Link href="#" onClick={(e) => {
-                        console.log('e', e)
-                        params.api.setQuickFilterValues([e.target.text])
-                    }}>
-                        {params.row.location.province}
-                    </Link>
+                        <Link href="#" onClick={(e) => {
+                            console.log('e', e)
+                            params.api.setQuickFilterValues([e.target.text])
+                        }}>
+                            {params.row.location.province}
+                        </Link>
                         &nbsp; | &nbsp;
                         <Link href="#" onClick={(e) => {
                             params.api.setQuickFilterValues([e.target.text])
@@ -120,19 +120,19 @@ export default function async() {
                         <IconButton aria-label="edit" color="info"
                                     onClick={() => {
                                         setRowID(params.row._id)
-                                        navigate(`edit`,{ state: { id: params.row._id } })
+                                        navigate(`edit`, {state: {id: params.row._id}})
                                     }}
                         >
                             <EditIcon/>
                         </IconButton>
-                            <IconButton aria-label="delete" color={"error"}
-                                        onClick={() => {
-                                            setRowID(params.row._id)
-                                            setOpen(true)
-                                        }}
-                            >
-                                <DeleteIcon/>
-                            </IconButton>
+                        <IconButton aria-label="delete" color={"error"}
+                                    onClick={() => {
+                                        setRowID(params.row._id)
+                                        setOpen(true)
+                                    }}
+                        >
+                            <DeleteIcon/>
+                        </IconButton>
                     </ButtonGroup>
                 );
             }

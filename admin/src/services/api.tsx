@@ -174,7 +174,7 @@ export const api = createApi({
             query: (path) => ({
                 url: `read-mdx`,
                 method: 'POST',
-                body: {path:path}
+                body: {path: path}
             }),
         }),
         // Job endpoints

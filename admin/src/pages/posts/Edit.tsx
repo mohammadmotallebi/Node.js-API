@@ -13,7 +13,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useLocation, useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const CreatePost = () => {
     const [tagsArray, setTagsArray] = React.useState([]);
@@ -55,8 +55,6 @@ const CreatePost = () => {
             setPost(data.data)
         })
     }, [])
-
-
 
 
     const handleAddTag = () => {

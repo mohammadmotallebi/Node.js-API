@@ -50,7 +50,7 @@ const CreateUser = () => {
 
     const handleAddUser = async () => {
         console.log('user', user)
-        if(user.name === '' || user.email === '' || user.password === '' || user.role === ''){
+        if (user.name === '' || user.email === '' || user.password === '' || user.role === '') {
             setError(true)
             return
         }
@@ -68,59 +68,60 @@ const CreateUser = () => {
             <CardHeader title="Create User"/>
             <CardContent>
                 <div>
-                <TextField
-                    sx={{marginBottom: 2}}
-                    fullWidth
-                    id="outlined-basic"
-                    label="Name"
-                    variant="outlined"
-                    value={user.name}
-                    error={error && user.name === ''}
-                    helperText={error && user.name === '' ? 'Name is required' : ''}
-                    required
-                    onChange={(e) => setUser({...user, name: e.target.value})}
-                />
+                    <TextField
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        id="outlined-basic"
+                        label="Name"
+                        variant="outlined"
+                        value={user.name}
+                        error={error && user.name === ''}
+                        helperText={error && user.name === '' ? 'Name is required' : ''}
+                        required
+                        onChange={(e) => setUser({...user, name: e.target.value})}
+                    />
                 </div>
                 <div>
-                <TextField
-                    sx={{marginBottom: 2}}
-                    fullWidth
-                    id="outlined-basic"
-                    label="Email"
-                    variant="outlined"
-                    error={error && user.email === ''}
-                    helperText={error && user.email === '' ? 'Email is required' : ''}
-                    value={user.email}
-                    onChange={(e) => setUser({...user, email: e.target.value})}
-                />
+                    <TextField
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        id="outlined-basic"
+                        label="Email"
+                        variant="outlined"
+                        error={error && user.email === ''}
+                        helperText={error && user.email === '' ? 'Email is required' : ''}
+                        value={user.email}
+                        onChange={(e) => setUser({...user, email: e.target.value})}
+                    />
                 </div>
                 <div>
-                <TextField
-                    sx={{marginBottom: 2}}
-                    fullWidth
-                    id="outlined-basic"
-                    label="Password"
-                    variant="outlined"
-                    error={error && user.password === ''}
-                    helperText={error && user.password === '' ? 'Password is required' : ''}
-                    value={user.password}
-                    onChange={(e) => setUser({...user, password: e.target.value})}
-                />
-                    </div>
+                    <TextField
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        id="outlined-basic"
+                        label="Password"
+                        variant="outlined"
+                        error={error && user.password === ''}
+                        helperText={error && user.password === '' ? 'Password is required' : ''}
+                        value={user.password}
+                        onChange={(e) => setUser({...user, password: e.target.value})}
+                    />
+                </div>
                 <div>
-                <Autocomplete
-                    sx={{marginBottom: 2}}
-                    fullWidth
-                    disablePortal
-                    id="combo-box-demo"
-                    options={rolesArray}
-                    onChange={(e: any, newValue: any) => {
-                        setUser({...user, role: newValue})
-                    }}
-                    renderInput={(params) =>
-                        <TextField {...params}
-                        error={error && user.role === ''} helperText={error && user.role === '' ? 'Role is required' : ''} label="Role" />}
-                />
+                    <Autocomplete
+                        sx={{marginBottom: 2}}
+                        fullWidth
+                        disablePortal
+                        id="combo-box-demo"
+                        options={rolesArray}
+                        onChange={(e: any, newValue: any) => {
+                            setUser({...user, role: newValue})
+                        }}
+                        renderInput={(params) =>
+                            <TextField {...params}
+                                       error={error && user.role === ''}
+                                       helperText={error && user.role === '' ? 'Role is required' : ''} label="Role"/>}
+                    />
                 </div>
             </CardContent>
             <CardActions>

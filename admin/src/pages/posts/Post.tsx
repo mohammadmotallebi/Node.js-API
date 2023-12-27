@@ -84,20 +84,20 @@ export default function async() {
                         <IconButton aria-label="edit" color="info"
                                     onClick={() => {
                                         setRowID(params.row._id)
-                                        navigate(`edit`,{ state: { id: params.row._id } })
+                                        navigate(`edit`, {state: {id: params.row._id}})
                                     }}
                         >
                             <EditIcon/>
                         </IconButton>
-                        { deletePostIsLoading ? <CircularProgress size={12} /> :
-                        <IconButton aria-label="delete" color={"error"}
-                                    onClick={() => {
-                                        setRowID(params.row._id)
-                                        setOpen(true)
-                                    }}
-                        >
-                            <DeleteIcon/>
-                        </IconButton>
+                        {deletePostIsLoading ? <CircularProgress size={12}/> :
+                            <IconButton aria-label="delete" color={"error"}
+                                        onClick={() => {
+                                            setRowID(params.row._id)
+                                            setOpen(true)
+                                        }}
+                            >
+                                <DeleteIcon/>
+                            </IconButton>
                         }
                     </ButtonGroup>
                 );

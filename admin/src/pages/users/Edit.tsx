@@ -11,8 +11,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useLocation, useNavigate } from "react-router-dom";
+import Select, {SelectChangeEvent} from '@mui/material/Select';
+import {useLocation, useNavigate} from "react-router-dom";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -69,7 +69,7 @@ const CreateUser = () => {
 
     const handleEditUser = async () => {
         console.log('user', user)
-        if(user.name === '' || user.email === '' || user.password === '' || user.role === ''){
+        if (user.name === '' || user.email === '' || user.password === '' || user.role === '') {
             setError(true)
             return
         }
@@ -126,7 +126,8 @@ const CreateUser = () => {
                         }}
                         renderInput={(params) =>
                             <TextField {...params}
-                                       error={error && user.role === ''} helperText={error && user.role === '' ? 'Role is required' : ''} label="Role" />}
+                                       error={error && user.role === ''}
+                                       helperText={error && user.role === '' ? 'Role is required' : ''} label="Role"/>}
                     />
                 </div>
             </CardContent>
