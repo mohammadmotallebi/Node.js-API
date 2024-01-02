@@ -8,13 +8,13 @@ const authMiddleware = (req, res, next) => {
     if (token) {
         verify(token, config.SECRET_KEY, (err, decoded) => {
             if (err) {
-                return res.status(401).json({ error: err });
+                return res.status(401).json({error: err});
             }
             req.decoded = decoded;
             next();
         });
     } else {
-        res.status(401).json({ error: 'Unauthorized. Token not found.' });
+        res.status(401).json({error: 'Unauthorized. Token not found.'});
     }
 }
 

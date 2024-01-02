@@ -21,16 +21,18 @@ class MdxController {
         );
         return resp.json(fileNames);
     }
+
     async readMdx(req, res) {
         console.log(req.body)
-        const fileContent = fs.readFileSync(req.body.path, {encoding:'utf8', flag:'r'});
+        const fileContent = fs.readFileSync(req.body.path, {encoding: 'utf8', flag: 'r'});
 
         return res.json({fileContent: fileContent});
     }
+
     async saveMdx(req, res) {
         const fileContent = req.body.content;
         const filePath = req.body.path;
-        const file = await fs.writeFileSync(filePath, fileContent, {encoding:'utf8', flag:'w'});
+        const file = await fs.writeFileSync(filePath, fileContent, {encoding: 'utf8', flag: 'w'});
         return res.json({file: file});
     }
 }

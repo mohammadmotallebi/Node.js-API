@@ -7,7 +7,7 @@ const apiKeyMiddleware = (req, res, next) => {
     if (apiKey && apiKey === config.X_API_KEY) {
         next();
     } else {
-        res.status(401).json({ error: 'Unauthorized. Invalid API key.' });
+        res.status(401).json({error: 'Unauthorized. Invalid API key.'});
     }
 };
 

@@ -7,7 +7,7 @@ class PostController {
             const posts = await PostModel.find(filter).and([{deleted: false}])
             res.status(200).json(posts);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
@@ -16,7 +16,7 @@ class PostController {
             const post = await PostModel.findById(req.params.id);
             res.status(200).json(post);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
@@ -25,7 +25,7 @@ class PostController {
             const post = await PostModel.create(req.body);
             res.status(200).json(post);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
@@ -34,17 +34,17 @@ class PostController {
             const post = await PostModel.findByIdAndUpdate(req.body._id, req.body);
             res.status(200).json(post);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
     async deletePost(req, res) {
         try {
-           const post = await PostModel.findByIdAndUpdate(req.params.id, {deleted: true})
-           const deletedPost = await PostModel.findById(post._id);
-              res.status(200).json(deletedPost);
+            const post = await PostModel.findByIdAndUpdate(req.params.id, {deleted: true})
+            const deletedPost = await PostModel.findById(post._id);
+            res.status(200).json(deletedPost);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
@@ -56,7 +56,7 @@ class PostController {
                 })
 
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
@@ -66,7 +66,7 @@ class PostController {
             const tags = await PostModel.find().distinct('tags');
             res.status(200).json(tags);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 }

@@ -8,7 +8,7 @@ class UserController {
             const users = await UserModel.find(filter).and([{deleted: false}])
             res.status(200).json(users);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
@@ -17,14 +17,14 @@ class UserController {
             const user = await UserModel.findById(req.params.id);
             res.status(200).json(user);
         } catch (error) {
-            res.status(500).json({ error: error });
+            res.status(500).json({error: error});
         }
     }
 
     async currentUser(req, res) {
         const user_id = req.cookies.session;
         const user = await UserModel.findById(user_id);
-        res.status(200).json({ user: user });
+        res.status(200).json({user: user});
     }
 
 

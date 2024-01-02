@@ -32,7 +32,10 @@ class AuthController {
             if (!isPasswordCorrect) {
                 return res.status(401).json({error: 'Incorrect Credentials!'});
             }
-            const token = jwt.sign({id: user._id}, config.SECRET_KEY, {algorithm: 'HS256', expiresIn: remember ? '60d' : '7d'});
+            const token = jwt.sign({id: user._id}, config.SECRET_KEY, {
+                algorithm: 'HS256',
+                expiresIn: remember ? '60d' : '7d'
+            });
             res.cookie('token', token, {
                 httpOnly: true
             });
@@ -53,7 +56,7 @@ class AuthController {
             if (token) {
                 jwt.verify(token, config.SECRET_KEY, (err, decoded) => {
                     if (err) {
-                        return res.status(401).json({ error: err });
+                        return res.status(401).json({error: err});
                     }
                     req.decoded = decoded;
                     res.status(200).json({
@@ -62,7 +65,7 @@ class AuthController {
                     });
                 });
             } else {
-                res.status(401).json({ error: 'Unauthorized. Token not found.' });
+                res.status(401).json({error: 'Unauthorized. Token not found.'});
             }
         } catch (error) {
             res.status(500).json({error: error});

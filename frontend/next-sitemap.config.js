@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-  siteUrl: process.env.SITE_URL || process.env.VERCEL_URL || 'http://localhost:3000',
-  generateRobotsTxt: true,
-  // ...other options
+    siteUrl: process.env.SITE_URL || process.env.VERCEL_URL || 'http://localhost:3000',
+    generateRobotsTxt: true,
+    // ...other options
 }
