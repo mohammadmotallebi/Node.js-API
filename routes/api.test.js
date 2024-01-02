@@ -11,6 +11,7 @@ app.use(express.json());
 // Mount your routes
 app.use('/api', routes.guest);
 app.use('/api', routes.user);
+
 function makeid(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -22,6 +23,7 @@ function makeid(length) {
     }
     return result;
 }
+
 describe('Guest Routes', () => {
     it('should register a user', async () => {
         const response = await request(app)
@@ -39,7 +41,7 @@ describe('Guest Routes', () => {
     });
 
     it('should login a user', async () => {
-        const response = await request(app,{
+        const response = await request(app, {
             headers: config.HEADER
 
         })
@@ -47,7 +49,7 @@ describe('Guest Routes', () => {
 
             .send({
                 email: 'ali@gmail.com',
-                password:'123456'
+                password: '123456'
             })
 
         expect(response.status).toBe(200);
@@ -60,19 +62,19 @@ describe('User Routes', () => {
     // Write similar tests for user routes using request(app)...
 
     it('should get all users', async () => {
-        const response = await request(app,{
+        const response = await request(app, {
             headers: config.HEADER
 
         })
             .post(`/api/users`)
-            .send({ /* Your data */ });
+            .send({ /* Your data */});
 
         expect(response.status).toBe(200);
         // Add more assertions based on your application logic
     });
 
     it('should get user by ID', async () => {
-        const response = await request(app,{
+        const response = await request(app, {
             headers: config.HEADER
 
         }).get(`/api/user/656a74f429e937cca293832e`); // Replace 123 with a valid user ID

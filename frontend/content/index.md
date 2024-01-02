@@ -7,14 +7,16 @@ seo:
 
 ---main
 images:
-  - src: /1FFAE0BF-2BC5-4838-BE1F-E1BA4C55C9BA.jpg
-    alt: my photo
-    width: 500
-    height: 718
-  - src: /hero-mobile.jpg
-    alt: my photo
-    width: 300
-    height: 300
+
+- src: /1FFAE0BF-2BC5-4838-BE1F-E1BA4C55C9BA.jpg
+  alt: my photo
+  width: 500
+  height: 718
+- src: /hero-mobile.jpg
+  alt: my photo
+  width: 300
+  height: 300
+
 ---
 
 # <Typewriter style={{fontSize:'52px'}}>Mohammad Motalebi</Typewriter>
@@ -23,18 +25,23 @@ images:
 
 <Sep size={12} />
 
-<span  style={{textAlign:'justify'}} >
-Full-Stack Web Developer with 10 years of Front-End and Back-End Developing and design expertise. Scripting languages like JavaScript, HTML, CSS, jQuery, and the Bootstrap framework are all things I'm proficient in. With React.js and React libraries like Redux, Router 6, Redux-Toolkit, Material-UI, I have 5 years or more of experience as well. I've used Node.js and the Express Framework for roughly 5 years, along with MongoDB, MySQL, and Microsoft SQL Server for 6 years each.
+<span style={{textAlign:'justify'}} >
+Full-Stack Web Developer with 10 years of Front-End and Back-End Developing and design expertise. Scripting languages
+like JavaScript, HTML, CSS, jQuery, and the Bootstrap framework are all things I'm proficient in. With React.js and
+React libraries like Redux, Router 6, Redux-Toolkit, Material-UI, I have 5 years or more of experience as well. I've
+used Node.js and the Express Framework for roughly 5 years, along with MongoDB, MySQL, and Microsoft SQL Server for 6
+years each.
 </span>
 
-
 ---achievements
+
 - number: 10+
   text: Years of experience
 - number: 40+
   text: Projects Completed
 - number: 4
   text: OpenSource Libraries
+
 ---
 
 

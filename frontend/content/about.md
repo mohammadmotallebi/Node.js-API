@@ -6,19 +6,27 @@ seo:
 ---
 
 
-
 ---personal_info
 name: Mohammad Motalebi
 images:
-  - src: /about.jpg
-    alt: my image
+
+- src: /about.jpg
+  alt: my image
+
 ---
+
 ##### <span>01.</span> About me
 
 <span style={{textAlign:'justify'}}>
-As a Full-Stack Developer at RallyAD Media, I create and maintain web and mobile applications using cutting-edge technologies such as React.js, Laravel, Node.js, and SQL. With over 10 years of experience in the field, I have developed 40+ websites, 10+ mobile apps, 5+ admin panels, and 15+ API services for various clients and industries.
+As a Full-Stack Developer at RallyAD Media, I create and maintain web and mobile applications using cutting-edge
+technologies such as React.js, Laravel, Node.js, and SQL. With over 10 years of experience in the field, I have
+developed 40+ websites, 10+ mobile apps, 5+ admin panels, and 15+ API services for various clients and industries.
 
-My passion is to deliver high-quality digital solutions that enhance user experiences, optimize performance, and support business goals. I have extensive knowledge and skills in cross-platform app development, front-end functionality, UI enhancement, database administration, and API development. I also leverage AWS services such as Elastic Beanstalk, EC2, RDS, Route 53, and Load Balancer for efficient app hosting and deployment. I enjoy working with a team of talented developers and collaborating on challenging and rewarding projects.
+My passion is to deliver high-quality digital solutions that enhance user experiences, optimize performance, and support
+business goals. I have extensive knowledge and skills in cross-platform app development, front-end functionality, UI
+enhancement, database administration, and API development. I also leverage AWS services such as Elastic Beanstalk, EC2,
+RDS, Route 53, and Load Balancer for efficient app hosting and deployment. I enjoy working with a team of talented
+developers and collaborating on challenging and rewarding projects.
 </span>
 
 ##### <span>02.</span> Certificates
@@ -41,17 +49,15 @@ My passion is to deliver high-quality digital solutions that enhance user experi
 - [SQL Server 2014 Design & Implementation | Fad](http://www.fad.ir/Cert.ashx?sn=MM4043-B2F)
 - [Querying Microsoft SQL Server 2016 | Fad](http://www.fad.ir/Cert.ashx?sn=MM7973T-9AA)
 
-
-
-
-
 ---skills_header
 title: I'm Specialized in
 list:
-  - Front-End Design
-  - Back-End Development
-  - Full Stack Development 
-  - Modern Frameworks
+
+- Front-End Design
+- Back-End Development
+- Full Stack Development
+- Modern Frameworks
+
 ---
 
 
@@ -59,60 +65,64 @@ list:
 ---skills[0]
 title: Full Stack Development
 list:
-  - title: JavaScript 
-    level: 4
-    icon:
-      src: /icons/javascript-svgrepo-com.svg
-  - title: TypeScript
-    level: 4
-    icon:
-      src: /icons/typescript-svgrepo-com.svg
-  - title: Node.js
-    level: 4
-    icon:
-      src: /icons/nodedotjs.svg
-  - title: React
-    level: 4
-    icon:
-      src: /icons/logo-react.svg
-  - title: Laravel
-    level: 4
-    icon:
-      src: /icons/logo-laravel.svg
-  - title: Framework7
-    level: 5
-    icon:
-      src: /icons/framework7-icon-svgrepo-com.svg
-  - title: Material-UI
-    level: 5
-    icon:
-      src: /icons/material-ui-svgrepo-com.svg
-  - title: MongoDB
-    level: 4
-    icon:
-      src: /icons/mongodb.svg
-  - title: SQL Server
-    level: 4
-    icon:
-      src: /icons/microsoftsqlserver-svgrepo-com.svg
-  - title: MySQL
-    level: 4
-    icon:
-      src: /icons/mysql.svg
+
+- title: JavaScript
+  level: 4
+  icon:
+  src: /icons/javascript-svgrepo-com.svg
+- title: TypeScript
+  level: 4
+  icon:
+  src: /icons/typescript-svgrepo-com.svg
+- title: Node.js
+  level: 4
+  icon:
+  src: /icons/nodedotjs.svg
+- title: React
+  level: 4
+  icon:
+  src: /icons/logo-react.svg
+- title: Laravel
+  level: 4
+  icon:
+  src: /icons/logo-laravel.svg
+- title: Framework7
+  level: 5
+  icon:
+  src: /icons/framework7-icon-svgrepo-com.svg
+- title: Material-UI
+  level: 5
+  icon:
+  src: /icons/material-ui-svgrepo-com.svg
+- title: MongoDB
+  level: 4
+  icon:
+  src: /icons/mongodb.svg
+- title: SQL Server
+  level: 4
+  icon:
+  src: /icons/microsoftsqlserver-svgrepo-com.svg
+- title: MySQL
+  level: 4
+  icon:
+  src: /icons/mysql.svg
+
 ---
 
 ---history[0]
 title: Employment
 list:
-  - name: RallyAd Media
-    description: Senior Full Stack Developer & DevOps
-    date: Nov 2022-Oct 2023
-  - name: Ekaseb
-    description: Senior Full Stack Developer
-    date: Aug 2018-Sep 2022
-  - name: Laksar Co.
-    description: IT Manager & Full Stack Developer
-    date: Jan 2008-Aug 2018
+
+- name: RallyAd Media
+  description: Senior Full Stack Developer & DevOps
+  date: Nov 2022-Oct 2023
+- name: Ekaseb
+  description: Senior Full Stack Developer
+  date: Aug 2018-Sep 2022
+- name: Laksar Co.
+  description: IT Manager & Full Stack Developer
+  date: Jan 2008-Aug 2018
+
 ---
 
 
@@ -120,10 +130,12 @@ list:
 ---history[1]
 title: Education
 list:
-  - name: Azad University - Iran
-    description: Associate degree Electronic Engineering
-    date: 2004-2006
-  - name: UAST- Iran
-    description: Bachelor Degree Electronic Engineering
-    date: 2013-2016
+
+- name: Azad University - Iran
+  description: Associate degree Electronic Engineering
+  date: 2004-2006
+- name: UAST- Iran
+  description: Bachelor Degree Electronic Engineering
+  date: 2013-2016
+
 ---

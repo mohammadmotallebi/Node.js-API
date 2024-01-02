@@ -15,20 +15,20 @@ import MDXPageTitle from '@/components/MDXPageTitle'
 const MDXYoutube = dynamic(() => import('@/components/MDXYoutube'))
 
 const MDX = {
-  a: MDXLink,
-  Button: MDXButton,
-  Wide: MDXWide,
-  img: MDXImage,
-  Youtube: MDXYoutube,
-  PageTitle: MDXPageTitle,
-  Icon,
-  Typewriter,
-  TipJar,
-  Newsletter,
-  Sep,
-  h1: (props) => <MDXHeading as="h1" {...props} />,
-  h2: (props) => <MDXHeading as="h2" {...props} />,
-  h3: (props) => <MDXHeading as="h3" {...props} />,
+    a: MDXLink,
+    Button: MDXButton,
+    Wide: MDXWide,
+    img: MDXImage,
+    Youtube: MDXYoutube,
+    PageTitle: MDXPageTitle,
+    Icon,
+    Typewriter,
+    TipJar,
+    Newsletter,
+    Sep,
+    h1: (props) => <MDXHeading as="h1" {...props} />,
+    h2: (props) => <MDXHeading as="h2" {...props} />,
+    h3: (props) => <MDXHeading as="h3" {...props} />,
 }
 
 export default MDX

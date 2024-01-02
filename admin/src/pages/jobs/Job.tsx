@@ -23,7 +23,7 @@ export default function async() {
     const [rowID, setRowID] = React.useState('')
     // const router = useRouter()
     const [jobs, {isLoading: jobsIsLoading}] = useLazyJobsQuery()
-    const [deleteJob, {isLoading: deleteJobIsLoading}] = useLazyDeleteJobQuery()
+    const [deleteJob] = useLazyDeleteJobQuery()
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false)
 

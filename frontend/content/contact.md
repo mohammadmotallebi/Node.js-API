@@ -6,18 +6,20 @@ seo:
 ---
 
 
-
 ---main
 images:
-  - src: /male-web-developer-5697155-4759218.png
-    alt: my photo
-    height: 718
+
+- src: /male-web-developer-5697155-4759218.png
+  alt: my photo
+  height: 718
+
 ---
 
 <PageTitle>
   ### Let’s keep in touch,
 
-  ### _we can bounce our ideas off each other._
+### _we can bounce our ideas off each other._
+
 </PageTitle>
 <span style={{textAlign:'justify'}}>
 Feel free to reach out and connect with me! Whether you have a question, want to discuss a potential collaboration, or just want to say hello, I'm always open to hearing from you. Your thoughts and inquiries are important to me, and I'm here to engage in meaningful conversations. Use the contact form below to drop me a message, and I'll get back to you as soon as possible. Alternatively, you can connect with me on social media or shoot me an email. I look forward to hearing from you and appreciate the opportunity to connect!

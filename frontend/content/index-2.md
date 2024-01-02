@@ -6,13 +6,14 @@ seo:
 ---
 
 
-
 ---main
 images:
-  - src: /hero-2.png
-    alt: my photo
-  - src: /hero-mobile.jpg
-    alt: my photo
+
+- src: /hero-2.png
+  alt: my photo
+- src: /hero-mobile.jpg
+  alt: my photo
+
 ---
 
 # <Typewriter>Carl Hanson</Typewriter>
@@ -33,9 +34,8 @@ const services = [
 if (have_a_project) navigate('/contact')
 ```
 
-
-
 ---achievements
+
 - number: 6+
   text: Years of experience
 - number: 70+
@@ -44,6 +44,7 @@ if (have_a_project) navigate('/contact')
   text: OpenSource Libraries
 - number: 50+
   text: Clients World Wide
+
 ---
 
 
@@ -56,21 +57,21 @@ if (have_a_project) navigate('/contact')
 
 [Get in Touch](/contact)
 
-
-
 ---companies
 title:
 list:
-  - name: Company 1
-    icon:
-      src: /icons/logo-1.svg
-  - name: Company 2
-    icon:
-      src: /icons/logo-3.svg
-  - name: Company 3
-    icon:
-      src: /icons/logo-3.svg
-  - name: Company 4
-    icon:
-      src: /icons/logo-4.svg
+
+- name: Company 1
+  icon:
+  src: /icons/logo-1.svg
+- name: Company 2
+  icon:
+  src: /icons/logo-3.svg
+- name: Company 3
+  icon:
+  src: /icons/logo-3.svg
+- name: Company 4
+  icon:
+  src: /icons/logo-4.svg
+
 ---

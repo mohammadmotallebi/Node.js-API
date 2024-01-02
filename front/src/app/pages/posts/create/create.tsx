@@ -8,14 +8,14 @@ import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { PostAdd } from '@mui/icons-material';
+import {PostAdd} from '@mui/icons-material';
 import {useLazyTagsQuery} from "@services/api";
 import {Autocomplete} from "@mui/material";
 
 const bull = (
     <Box
         component="span"
-        sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+        sx={{display: 'inline-block', mx: '2px', transform: 'scale(0.8)'}}
     >
         •
     </Box>
@@ -47,11 +47,11 @@ export default function () {
     return (
         <Card sx={{
             minWidth: 275,
-            '& .MuiTextField-root': { m: 1, width: '50ch' },
+            '& .MuiTextField-root': {m: 1, width: '50ch'},
         }}>
             <CardContent>
                 <div>
-                    <TextField label="Title" color="secondary"  focused />
+                    <TextField label="Title" color="secondary" focused/>
                 </div>
                 <div>
 
@@ -62,7 +62,7 @@ export default function () {
                         onChange={setValue}
                         modules={{
                             toolbar: [
-                                [{ 'header': [1, 2, false] }],
+                                [{'header': [1, 2, false]}],
                                 ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                                 [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
                                 ['link', 'image'],
@@ -73,7 +73,7 @@ export default function () {
                             height: '300px',
                             marginBottom: '40px'
 
-                    }}
+                        }}
                     />
                 </div>
                 <div>
@@ -99,7 +99,7 @@ export default function () {
 
             </CardContent>
             <CardActions>
-                <Button size="small"  color={'success'} variant="contained">
+                <Button size="small" color={'success'} variant="contained">
                     <PostAdd/>
                     Add Post
                 </Button>

@@ -17,7 +17,7 @@ const style = {
     p: 4,
 };
 
-export default function async () {
+export default function async() {
 
     return (
         <div className="flex">
@@ -31,7 +31,7 @@ export default function async () {
                     <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
                         Text in a modal
                     </Typography>
-                    <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
+                    <Typography id="keep-mounted-modal-description" sx={{mt: 2}}>
                         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
                     </Typography>
                 </Box>

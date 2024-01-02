@@ -17,7 +17,6 @@ export const redirect = (path: string) => {
 }
 
 
-
 // @ts-ignore
 export const api = createApi({
     reducerPath: 'api',
@@ -69,8 +68,8 @@ export const api = createApi({
             // logout and redirect to login page
             // @ts-ignore
             onQueryStarted(arg: QueryArg, api: MutationLifecycleApi<QueryArg, BaseQuery, ResultType, ReducerPath>): Promise<void> | void {
-                    api.dispatch(setUser({}))
-                    api.dispatch(setIsLoggedIn(false))
+                api.dispatch(setUser({}))
+                api.dispatch(setIsLoggedIn(false))
             }
         }),
         auth: build.query({

@@ -109,7 +109,10 @@ export default function () {
             <Grid container spacing={4}>
                 <Grid md>
                     <Chart type='line'
-                           series={[{name: 'Mohammad', data: [5, 6, 4, 9, 3, 5, 7, 9, 2, 1, 8, 7, 9, 3, 5, 4, 8, 3, 1, 9, 6, 3, 5, 7, 4]}]}
+                           series={[{
+                               name: 'Mohammad',
+                               data: [5, 6, 4, 9, 3, 5, 7, 9, 2, 1, 8, 7, 9, 3, 5, 4, 8, 3, 1, 9, 6, 3, 5, 7, 4]
+                           }]}
                            options={{
                                chart: {
                                    height: 350,

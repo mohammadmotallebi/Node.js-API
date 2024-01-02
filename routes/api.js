@@ -21,8 +21,8 @@ userRouter.post('/auth', authController.checkAuth);
 userRouter.post('/users', roleMiddleware(['*']), userController.getAllUsers)
 userRouter.get('/user/:id', roleMiddleware(['*']), userController.getUserById);
 userRouter.post('/user/create', roleMiddleware(['admin']), userController.userCreate);
-userRouter.get('/me',roleMiddleware(['*']), userController.currentUser);
-userRouter.post('/logout',roleMiddleware(['*']), authController.logout);
+userRouter.get('/me', roleMiddleware(['*']), userController.currentUser);
+userRouter.post('/logout', roleMiddleware(['*']), authController.logout);
 userRouter.put('/update-me', roleMiddleware(['*']), userController.updateUser);
 userRouter.put('/update-my-password', roleMiddleware(['*']), userController.updatePassword);
 userRouter.put('/user/:id/role-update', roleMiddleware(['*']), userController.updateRole);
@@ -34,10 +34,10 @@ userRouter.post('/roles', roleMiddleware(['*']), userController.getAllRoles);
 // Post routes
 userRouter.post('/posts', roleMiddleware(['*']), postController.getAllPosts);
 userRouter.get('/post/:id', roleMiddleware(['*']), postController.getPostById);
-userRouter.post('/post/create', roleMiddleware(['admin','author','super-admin']), postController.createPost);
-userRouter.put('/post/update', roleMiddleware(['admin','author','super-admin']), postController.updatePost);
-userRouter.delete('/post/:id/delete', roleMiddleware(['admin','super-admin']), postController.deletePost);
-userRouter.put('/post/:id/restore', roleMiddleware(['admin','super-admin']), postController.restorePost);
+userRouter.post('/post/create', roleMiddleware(['admin', 'author', 'super-admin']), postController.createPost);
+userRouter.put('/post/update', roleMiddleware(['admin', 'author', 'super-admin']), postController.updatePost);
+userRouter.delete('/post/:id/delete', roleMiddleware(['admin', 'super-admin']), postController.deletePost);
+userRouter.put('/post/:id/restore', roleMiddleware(['admin', 'super-admin']), postController.restorePost);
 // Tag routes
 userRouter.post('/tags', roleMiddleware(['*']), postController.getAllTags);
 
@@ -48,11 +48,11 @@ userRouter.get('/list-mdx', roleMiddleware(['*']), mdxController.getMdxList);
 // Job routes
 userRouter.post('/jobs', roleMiddleware(['*']), jobController.getAllJobs);
 userRouter.get('/job/:id', roleMiddleware(['*']), jobController.getJobById);
-userRouter.post('/job/create', roleMiddleware(['admin','super-admin']), jobController.createJob);
+userRouter.post('/job/create', roleMiddleware(['admin', 'super-admin']), jobController.createJob);
 // userRouter.put('/job/update', roleMiddleware(['admin','super-admin']), jobController.updateJob);
-userRouter.delete('/job/:id/delete', roleMiddleware(['admin','super-admin']), jobController.deleteJob);
-userRouter.put('/job/:id/restore', roleMiddleware(['admin','super-admin']), jobController.restoreJob);
-userRouter.post('/job/upload-image', roleMiddleware(['admin','super-admin']), jobController.uploadImage);
+userRouter.delete('/job/:id/delete', roleMiddleware(['admin', 'super-admin']), jobController.deleteJob);
+userRouter.put('/job/:id/restore', roleMiddleware(['admin', 'super-admin']), jobController.restoreJob);
+userRouter.post('/job/upload-image', roleMiddleware(['admin', 'super-admin']), jobController.uploadImage);
 
 module.exports = {
     guest: guestRouter,

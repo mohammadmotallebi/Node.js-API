@@ -18,7 +18,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import Snackbar from '@mui/material/Snackbar';
 import {Alert} from '@mui/material';
 import Slide, {SlideProps} from '@mui/material/Slide';
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 
 
 const Img = styled.img`
@@ -41,6 +41,7 @@ export default function Page() {
     const email = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null)
     const router = useRouter()
+
     interface User {
         email: string,
         password: string
@@ -56,7 +57,7 @@ export default function Page() {
     */
     // @ts-ignore
     const [login, {data, isLoading, isError, isSuccess, status,}] = useLazyLoginQuery()
-const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState('');
 
 
@@ -66,7 +67,7 @@ const [open, setOpen] = React.useState(false);
             password: password.current?.value as string
         }
         const result = await login(user).then(data => {
-            console.log('Data =>',data)
+            console.log('Data =>', data)
         })
 
         console.log('result', store.getState().auth)
@@ -81,7 +82,7 @@ const [open, setOpen] = React.useState(false);
     }, [isLoggedIn])
 
 
-        // check auth
+    // check auth
 
     return (
         <div className="flex">

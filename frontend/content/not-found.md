@@ -6,6 +6,7 @@ seo:
 ---
 
 #### <span>Oops!</span>
+
 ## Page not found
 
 <Sep line />

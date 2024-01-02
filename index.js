@@ -9,22 +9,22 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 8050;
 
-function logErrors (err, req, res, next) {
+function logErrors(err, req, res, next) {
     console.error(err.stack)
     next(err)
 }
 
-function clientErrorHandler (err, req, res, next) {
+function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
-        res.status(500).json({ error: 'Something failed!' })
+        res.status(500).json({error: 'Something failed!'})
     } else {
         next(err)
     }
 }
 
-function errorHandler (err, req, res, next) {
+function errorHandler(err, req, res, next) {
     res.status(500)
-    res.render('error', { error: err })
+    res.render('error', {error: err})
 }
 
 app.use(methodOverride('_method'))

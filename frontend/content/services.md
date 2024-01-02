@@ -6,14 +6,14 @@ seo:
 ---
 
 
-
 ---main
 ---
 
 <PageTitle>
   ### Services
 
-  ### _My Expertise_
+### _My Expertise_
+
 </PageTitle>
 
 ###### Solving problems
@@ -44,7 +44,7 @@ Et tempor non mollit dolor et do aute voluptate ea ullamco.
 ---services[0]
 title: Web and Mobile App Design
 icon:
-  src: /icons/mobile-app.svg
+src: /icons/mobile-app.svg
 ---
 
 <small>
@@ -62,7 +62,7 @@ icon:
 ---services[1]
 title: Project Strategy & Development
 icon:
-  src: /icons/prisma.svg
+src: /icons/prisma.svg
 ---
 
 <small>
@@ -80,7 +80,7 @@ icon:
 ---services[2]
 title: UI/UX Design & Optimization
 icon:
-  src: /icons/dashboard.svg
+src: /icons/dashboard.svg
 ---
 
 <small>
@@ -90,6 +90,7 @@ icon:
     - <strong>Design Strategy</strong>
     - <strong>Web and Mobile App Design</strong>
     - <strong>Front-end Development</strong>
+
 </small>
 
 
@@ -97,14 +98,14 @@ icon:
 ---services[3]
 title: Application Audit & Debugging
 icon:
-  src: /icons/audit.svg
+src: /icons/audit.svg
 ---
 
 <small>
   Defining the problem, identifying the scope and finally, organizing. Et tempor non mollit dolor et
   do aute voluptate ea ullamco culpa pariatur.
 
-  - <strong>Design Strategy </strong>
-  - <strong>Web and Mobile App Design </strong>
-  - <strong>Front-end Development</strong>
-</small>
+- <strong>Design Strategy </strong>
+- <strong>Web and Mobile App Design </strong>
+- <strong>Front-end Development</strong>
+  </small>
