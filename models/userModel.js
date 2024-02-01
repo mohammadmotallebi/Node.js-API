@@ -1,5 +1,6 @@
 const mongoose = require('../dbConfig');
 
+// User Schema (Model)
 const userSchema = new mongoose.Schema({
         name: {
             type: String,
@@ -32,13 +33,13 @@ const userSchema = new mongoose.Schema({
     },
     {
         timestamps: false,
-        toJSON: {
+        toJSON: { // to return virtuals in response and remove password from response
             virtuals: true, transform: function (doc, ret) {
                 delete ret.password;
                 return ret;
             }
         },
-        toObject: {
+        toObject: { // to return virtuals in response and remove password from response
             virtuals: true, transform: function (doc, ret) {
                 delete ret.password;
                 return ret;
