@@ -10,11 +10,11 @@ export const api = createApi({
         baseUrl: 'http://localhost:8050/api/',
         credentials: 'include',
         prepareHeaders: (headers, {}) => {
-            const token = getCookieValue('token')
-            console.log('token', token)
-            if (token) {
-                headers.set('Authorization', `Bearer ${token}`)
-            }
+            // const token = getCookieValue('token')
+            // console.log('token', token)
+            // if (token) {
+            //     headers.set('Authorization', `Bearer ${token}`)
+            // }
             headers.set('Accept', 'application/json')
             headers.set('X-API-KEY', config.X_API_KEY)
             return headers

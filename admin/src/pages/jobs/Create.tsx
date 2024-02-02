@@ -5,7 +5,6 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
-import {Editor} from '@tinymce/tinymce-react';
 import {PostAdd} from '@mui/icons-material';
 import {useLazyCreateJobQuery} from "../../services/api";
 import {FilePond, registerPlugin} from 'react-filepond'
@@ -14,7 +13,6 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import config from "../../config.json";
-import {getCookieValue} from "../../services/helpers"
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 import {useNavigate} from "react-router-dom";
@@ -22,14 +20,10 @@ import {useNavigate} from "react-router-dom";
 const CreateJob = () => {
     const [createJob] = useLazyCreateJobQuery()
     const navigate = useNavigate();
-    const [job, setJob] = React.useState({
+    const [job, setJob] = React.useState<any>({
         title: '',
         description: '',
-        location: {
-            city: '',
-            province: '',
-            country: ''
-        },
+        location: [],
         company: '',
         website: '',
         phone: '',
@@ -38,11 +32,14 @@ const CreateJob = () => {
         address: '',
 
     })
-    const [open, setOpen] = React.useState(false);
+    const [city, setCity] = React.useState<string>('')
+    const [province, setProvince] = React.useState<string>('')
+    const [country, setCountry] = React.useState<string>('')
 
 
     const handleAddJob = async () => {
         console.log('job', job)
+        job.location = [city, province, country]
         await createJob(job).then((data: any) => {
             console.log('data', data)
             navigate('/jobs')
@@ -51,13 +48,14 @@ const CreateJob = () => {
 
     const handleAddImage = (e: any) => {
         console.log('e', e)
-        setJob(prevState => ({
+        setJob((prevState: any) => ({
             ...prevState,
             images: e.map((file: any) => file.file.name)
         }))
     }
 
 
+    // @ts-ignore
     return (
         <MyMenu>
             <Card sx={{
@@ -91,21 +89,21 @@ const CreateJob = () => {
                             label="City"
                             variant="outlined"
                             margin="normal"
-                            onChange={(e) => setJob({...job, location: {...job.location, city: e.target.value}})}
+                            onChange={(e) =>  setCity(e.target.value)}
                         />
                         <TextField
                             id="province"
                             label="Province"
                             variant="outlined"
                             margin="normal"
-                            onChange={(e) => setJob({...job, location: {...job.location, province: e.target.value}})}
+                            onChange={(e) => setProvince(e.target.value)}
                         />
                         <TextField
                             id="country"
                             label="Country"
                             variant="outlined"
                             margin="normal"
-                            onChange={(e) => setJob({...job, location: {...job.location, country: e.target.value}})}
+                            onChange={(e) => setCountry(e.target.value)}
                         />
                     </div>
                     <div>
@@ -167,6 +165,7 @@ const CreateJob = () => {
                             server={
                                 {
                                     url: "http://localhost:8050/api/job/upload-image",
+                                    //@ts-ignore
                                     process: {
                                         withCredentials: true,
                                         method: 'POST',

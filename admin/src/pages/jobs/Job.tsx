@@ -1,7 +1,7 @@
 import MyMenu from "../../components/Menu";
 import Loading from "../../components/Loading";
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useLazyJobsQuery, useLazyDeleteJobQuery} from "../../services/api";
 import {DataGrid} from '@mui/x-data-grid/DataGrid';
 import {
@@ -72,23 +72,22 @@ export default function async() {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link href="#" onClick={(e) => {
-                            params.api.setQuickFilterValues([e.target.text])
+                        <Link href="#" onClick={() => {
+                            params.api.setQuickFilterValues([params.row.location[0].replace(/\s/g, '')])
                         }}>
-                            {params.row.location.city}
+                            {params.row.location[0]}
                         </Link>
                         &nbsp; | &nbsp;
-                        <Link href="#" onClick={(e) => {
-                            console.log('e', e)
-                            params.api.setQuickFilterValues([e.target.text])
+                        <Link href="#" onClick={() => {
+                            params.api.setQuickFilterValues([params.row.location[1].replace(/\s/g, '')])
                         }}>
-                            {params.row.location.province}
+                            {params.row.location[1]}
                         </Link>
                         &nbsp; | &nbsp;
-                        <Link href="#" onClick={(e) => {
-                            params.api.setQuickFilterValues([e.target.text])
+                        <Link href="#" onClick={() => {
+                            params.api.setQuickFilterValues([params.row.location[2].replace(/\s/g, '')])
                         }}>
-                            {params.row.location.country}
+                            {params.row.location[2]}
                         </Link>
                     </>
                 )
@@ -170,7 +169,7 @@ export default function async() {
                             paginationModel: {
                                 pageSize: 5,
                             },
-                        },
+                        }
                     }}
                     loading={jobsIsLoading}
                     pageSizeOptions={[5, 10, 20, 50, 100]}
