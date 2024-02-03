@@ -22,6 +22,7 @@ class JobController {
     }
 
     async createJob(req, res) { // create new job
+        console.log(req.body, req.user)
         try {
             const job = await JobModel.create(...req.body, {user_id: req.user._id}); // create new job with user id
             res.status(200).json(job); // return job in response
