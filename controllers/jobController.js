@@ -43,7 +43,9 @@ class JobController {
 
     async restoreJob(req, res) { // restore job
         try {
-            await JobModel.findByIdAndUpdate(req.params.id, {deleted: false}) // set job deleted status to false
+            await JobModel.findByIdAndUpdate(req.params.id, {deleted: false}, {
+                new: true
+            }) // set job deleted status to false
                 .then(job => {
                     res.status(200).json(job); // return restored job in response
                 })
