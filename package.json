@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon --ext *",
+    "watch": "nodemon index.js",
     "test": "jest --verbose"
   },
   "dependencies": {
