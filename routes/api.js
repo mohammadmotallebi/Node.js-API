@@ -10,7 +10,6 @@ const postController = require('../controllers/postController');
 const mdxController = require('../controllers/mdxController');
 const jobController = require('../controllers/jobController');
 
-
 guestRouter.use(apiKeyMiddleware);
 guestRouter.post('/register', authController.register);
 guestRouter.post('/login', authController.login);
