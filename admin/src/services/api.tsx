@@ -1,7 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {setUser, setIsLoggedIn} from "../redux/slices/authSlice";
 import config from "../config.json";
-import {getCookieValue} from "./helpers";
 
 // @ts-ignore
 export const api = createApi({
