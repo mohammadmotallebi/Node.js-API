@@ -1,7 +1,7 @@
 import MyMenu from "../../components/Menu";
 import Loading from "../../components/Loading";
 import React from "react";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useLazyJobsQuery, useLazyDeleteJobQuery} from "../../services/api";
 import {DataGrid} from '@mui/x-data-grid/DataGrid';
 import {
