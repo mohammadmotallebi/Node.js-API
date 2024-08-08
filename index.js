@@ -27,6 +27,22 @@ function errorHandler(err, req, res, next) {
     res.render('error', {error: err})
 }
 
+//a function to check loading state this function should wait for complete state
+async function loading(){
+    // await console.log('Echeck Element =>>>>>',$(document)[0].readyState)
+    while ($(document)[0].readyState !== 'complete') {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    console.log('State =>',$(document)[0].readyState)
+    return true;
+}
+
+loading().then((res) => {
+    console.log('Loading State =>',res)
+})
+
+
+
 app.use(methodOverride('_method'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
